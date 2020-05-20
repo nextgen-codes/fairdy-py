@@ -1,0 +1,8 @@
+#ignore test.py
+test.py
+
+#ignore fairdypy pycache
+
+*__pycache__*
+
+*.code-workspace

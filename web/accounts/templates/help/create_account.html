@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Documentation - Create Account{% endblock %}
+
+{% block content %}
+    <div class="col-12">
+        <div>
+            <h2>How to create an account on this website.</h2>
+            <ol>
+                <li><strong>Go to the <a href="{% url 'accounts:register' %}">registration</a> page.</strong></li>
+                <li>
+                    <strong>Choose a username</strong>- this will be publicly visible on all simulations you run.
+                    <ul>
+                        <li>must be 150 characters or fewer</li>
+                        <li>must be composed of alphanumeric characters, and _ @ + . -</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Choose a password</strong>- enter twice to verify.
+                    <ul>
+                        <li>must be at least 9 characters long</li>
+                        <li>must not be too similar to username or email</li>
+                        <li>must not be in a list of the 20,000 most common passwords</li>
+                        <li>must not be entirely numeric</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Confirm you agree with terms and conditions:</strong>
+                    <ul>
+                        <li>This website uses cookies to optimize user experience by storing information about your session.</li>
+                        <li>This website will store your username and email, as well as timestamps associated with registration, login, use, etc.</li>
+                        <li>The simulations you run will be publicly visible with your username, your email will only be visible to website administrators.</li>
+                        <li>You may delete your account at any time by going to your profile and following the 'Delete Account' link.</li>
+                        <li>After you delete your account, all simulations you have run will remain in our database, but without any reference to your former account or personal data.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Follow the link in your email to verify your account.</strong> If you have not received a link:
+                    <ul>
+                        <li>Check your spam folder</li>
+                        <li>Resend the email confirmation from your <a href="{% url 'accounts:profile' %}">profile</a> page when logged in</li>
+                        <li>Try using another email address, this can be updated on your <a href="{% url 'accounts:profile' %}">profile</a> page when logged in</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Start simulating storage system life cycles!</strong>
+                    <ul>
+                        <li>You can only run simulations when you are logged in.</li>
+                        <li>The number of simulations you can run within a 30 day period is limited, check your <a href="{% url 'accounts:profile' %}">profile</a> page for details</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+
+
+{% endblock %}

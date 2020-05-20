@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <div class="col-12">
+        <div>
+            <h4>About FaiRDy</h4>
+            <p>FaiRDy is a lightweight approach to simulate the failure-repair dynamics of storage systems
+                and explore the effects of different redundancy strategies and parameters on system degradation.
+                FaiRDy is based on cellular automata, the blocks of storage system data are represented as cells,
+                which can either be available or unavailable. The simulations are run in two-part cycles, in the first
+                half of the cycle, cells are randomly marked as unavailable according to the specified probability of failure.
+                In the second half of the cycle, the unavailable blocks are repaired where possible according to rules
+                of the erasure code.
+            </p>
+            <p>
+                FaiRDy was created by Veronica Estrada Galiñanes, Associate Professor,
+                University of Stavanger.
+            </p>
+
+            <p>
+                FaiRDy-Py and fairdy.ux.uis.no were created by Adam Becker and Lars Kartevoll in Spring 2020
+                for their exit project in the Bachelor of Computer Science program at the University of Stavanger, Norway.
+                The creator of FaiRDy, Veronica Estrada Galiñanes, advised us on our implementation of the framework in Python.
+            </p>
+            <p>
+                Our project is open source, you can download and customize our code on
+                <a href="https://github.com/larsthelord/FaiRDy-Py">github.com/larsthelord/FaiRDy-Py</a>
+            </p>
+
+        </div>
+    </div>
+
+
+{% endblock %}

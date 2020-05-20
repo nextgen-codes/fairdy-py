@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Documentation - Manage Account{% endblock %}
+
+{% block content %}
+    <div class="col col-md-8">
+        <div>
+            <h2>Manage your FaiRDy account</h2>
+            <h4>User Menu</h4>
+            <p>
+                The user menu is located in the upper right corner of the page. Before logging in,
+                Sign Up and Log In links are shown. After logging in, the username is displayed with
+                an icon to open a drop-down menu.
+            </p>
+            <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu.png' %}" alt="user menu">
+            <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu_small_screen.png' %}" alt="user menu">
+            <table>
+                <tr>
+                    <th>My Simulations</th>
+                    <td>shows all simulations run with your account</td>
+                </tr>
+                <tr>
+                    <th>Profile</th>
+                    <td>the main page for viewing and modifying account details</td>
+                </tr>
+                <tr>
+                    <th>Log out</th>
+                    <td>log out of website and return to home page</td>
+                </tr>
+            </table>
+
+            <h4>Profile Page</h4>
+            <p>
+                When logged in, you can access your
+                {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:profile' %}">profile</a>
+                {% else %}
+                    <span>profile</span>
+                {% endif %}
+                page from the user menu. The profile page shows key details about your account and contains
+                links to update your username, email, and password. If you wish to delete your account, you
+                will find the link at the bottom of your profile page.
+            </p>
+
+            <h6>Remaining Credits</h6>
+            <p>While </p>
+
+            <h4>Forgotten Password</h4>
+            <p>
+
+            </p>
+        </div>
+    </div>
+
+
+{% endblock %}

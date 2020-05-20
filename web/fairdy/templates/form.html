@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <style>
+        .card-header:not(.first-header) {
+            border-top: 1px solid rgba(0,0,0,.125);
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+
+    <div class="col-12 col-md-8">
+        <div class="card">
+            <form method="post" action="{% url 'fairdy:run_simulation' %}">
+                {% csrf_token %}
+                <!--  DEFINE STRIPE SECTION  -->
+                <div class="card-header first-header">
+                    Define Stripe
+
+                    <a href="{% url 'fairdy:help_run_simulation' %}" class="float-right">
+                        <svg class="bi bi-plus-square" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                            <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                        </svg>
+                    </a>
+
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+
+                        <!--ERASURE CODE SELECTOR-->
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-8 col-form-label pl-0" for="{{ sim_form.code_type.name }}">{{ sim_form.code_type.label }}:</label>
+                            <select class="col-6 col-sm-4 form-control" name="{{ sim_form.code_type.name }}" id="{{ sim_form.code_type.auto_id }}">
+                                {% for key, value in sim_form.code_type.field.choices %}
+                                    <option value="{{ key }}" {% if sim_form.code_type.value == key %}selected{% endif %}>{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                            {{ sim_form.code_type.errors }}
+                        </div>
+
+
+                        <!--STRIPE PARAMETERS-->
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.k_value.name }}">{{ sim_form.k_value.label }}:</label>
+                            <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                   name="{{ sim_form.k_value.name }}" id="{{ sim_form.k_value.auto_id }}">
+                            {{ sim_form.k_value.errors }}
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.m_value.name }}">{{ sim_form.m_value.label }}:</label>
+                            <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                   name="{{ sim_form.m_value.name }}" id="{{ sim_form.m_value.auto_id }}">
+                            {{ sim_form.m_value.errors }}
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.n_value.name }}">{{ sim_form.n_value.label }}:</label>
+                            <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                   name="{{ sim_form.n_value.name }}" id="{{ sim_form.n_value.auto_id }}">
+                            {{ sim_form.n_value.errors }}
+                        </div>
+
+                        <!--GPC FIELDS-->
+                        <div class="gpc-fields">
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.k_horizontal.name }}">{{ gpc_form.k_horizontal.label }}:</label>
+                                <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                       data-content="<img src='{% static 'fairdy/gpc_k_hor.svg' %}'></img>"
+                                       name="{{ gpc_form.k_horizontal.name }}" id="{{ gpc_form.k_horizontal.auto_id }}">
+                                {{ gpc_form.k_horizontal.errors  }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.m_horizontal.name }}">{{ gpc_form.m_horizontal.label }}:</label>
+                                <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                       data-content="<img src='{% static 'fairdy/gpc_m_hor.svg' %}'></img>"
+                                       name="{{ gpc_form.m_horizontal.name }}" id="{{ gpc_form.m_horizontal.auto_id }}">
+                                {{ gpc_form.m_horizontal.errors  }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.k_vertical.name }}">{{ gpc_form.k_vertical.label }}:</label>
+                                <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                       data-content="<img src='{% static 'fairdy/gpc_k_ver.svg' %}'></img>"
+                                       name="{{ gpc_form.k_vertical.name }}" id="{{ gpc_form.k_vertical.auto_id }}">
+                                {{ gpc_form.k_vertical.errors  }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.m_vertical.name }}">{{ gpc_form.m_vertical.label }}:</label>
+                                <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                       data-content="<img src='{% static 'fairdy/gpc_m_ver.svg' %}'></img>"
+                                       name="{{ gpc_form.m_vertical.name }}" id="{{ gpc_form.m_vertical.auto_id }}">
+                                {{ gpc_form.m_vertical.errors  }}
+                            </div>
+                            <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.num_repair_cycles.name }}">{{ gpc_form.num_repair_cycles.label }}:</label>
+                            <select class="col-6 col-sm-3 form-control" name="{{ gpc_form.num_repair_cycles.name }}" id="{{ gpc_form.num_repair_cycles.auto_id }}">
+                                <option value=1>1</option>
+                                <option value=2 selected>2</option>
+                                <option value=3>3</option>
+                            </select>
+                            {{ sim_form.storage_location_mode.errors }}
+                        </div>
+                            <!--GPC IS OVERLAPPING / NON-OVERLAPPING AUTO CALCULATING RADIO BUTTONS-->
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-12 col-sm-9 col-form-label p-0">The generalized pyramid stripe you defined is: </legend>
+                                    <div class="col-6 col-sm-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="overlappingRadio" id="radio_overlapping" disabled>
+                                            <label class="form-check-label" for="radio_overlapping">
+                                                Overlapping
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <input class="form-check-input" type="radio" name="overlappingRadio" id="radio_nonoverlapping" disabled>
+                                            <label class="form-check-label" for="radio_nonoverlapping">
+                                                Non-Overlapping
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  DEFINE SIMULATION PARAMETERS SECTION  -->
+                <div class="card-header">
+                    Simulation Parameters
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.num_stripes.name }}">{{ sim_form.num_stripes.label }}:</label>
+                            <input type="number" min=0 class="col-6 col-sm-3 form-control" name="{{ sim_form.num_stripes.name }}" id="{{ sim_form.num_stripes.auto_id }}">
+                            {{ sim_form.num_stripes.errors }}
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="id_blocks_in_system">Total number of blocks in system:</label>
+                            <input type="number" min=0 class="col-6 col-sm-3 form-control" id="id_blocks_in_system" disabled>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.num_cycles.name }}">{{ sim_form.num_cycles.label }}:</label>
+                            <input type="number" min=0 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                   data-content="<img src='{% static 'fairdy/cycles.svg' %}'></img>"
+                                   title="each cycle has two stages, fault-injection and fault repair"
+                                   name="{{ sim_form.num_cycles.name }}" id="{{ sim_form.num_cycles.auto_id }}">
+                            {{ sim_form.num_cycles.errors }}
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-10 col-form-label pl-0" for="{{ sim_form.p_error.name }}">{{ sim_form.p_error.label }}:</label>
+                            <input type="number" step=0.01 min=0 max=1 class="col-4 col-sm-2 form-control" data-toggle="popover"
+                                   data-content="<img src='{% static 'fairdy/p_error.svg' %}'></img>"
+                                   title="p_error determines (on average) the proportion of blocks marked unrecoverable in a given cycle"
+                                   name="{{ sim_form.p_error.name }}" id="{{ sim_form.p_error.auto_id }}">
+                            {{ sim_form.p_error.errors }}
+                        </div>
+                    </div>
+                </div>
+
+                <!--  DEFINE OPTIONAL PARAMETERS SECTION  -->
+                <div class="card-header">
+                    Optional Parameters
+                    <a href="#" id="toggleOptionsButton" class="float-right">
+                        <svg class="bi bi-plus-square" width="1em" height="1em" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card-body" id="option-fields" style="display: none">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <label class="col-form-label col-12 col-sm-6 pl-0" for="{{ sim_form.lazy_heal_threshold.name }}">{{ sim_form.lazy_heal_threshold.label }}:</label>
+
+
+                            <div class="form-group col-6 col-sm-3">
+                                    <div class="gpc-fields">
+                                    <small class="form-text text-muted">
+                                        vertical
+                                    </small>
+                                    <input type="number" value=1 min=1 max=10000 class="form-control" name="{{ gpc_form.lazy_heal_threshold_ver.name }}" id="{{ gpc_form.lazy_heal_threshold_ver.auto_id }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6 col-sm-3 pr-0">
+
+                                <small class="form-text text-muted gpc-fields">
+                                    horizontal
+                                </small>
+                                <input type="number" value=1 min=1 max=10000 class="form-control" name="{{ sim_form.lazy_heal_threshold.name }}" id="{{ sim_form.lazy_heal_threshold.auto_id }}">
+
+
+                            </div>
+                            {{ sim_form.lazy_heal_threshold.errors }}
+                            {{ gpc_form.lazy_heal_threshold_ver.errors }}
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-8 col-form-label pl-0" for="{{ sim_form.storage_location_mode.name }}">{{ sim_form.storage_location_mode.label }}:</label>
+                            <select class="col-6 col-sm-4 form-control" name="{{ sim_form.storage_location_mode.name }}" id="{{ sim_form.storage_location_mode.auto_id }}">
+                                {% for key, value in sim_form.storage_location_mode.field.choices %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                            {{ sim_form.storage_location_mode.errors }}
+                        </div>
+
+                        <!-NUMBER OF STORAGE LOCATIONS-->
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.num_storage_locations.name }}">{{ sim_form.num_storage_locations.label }}:</label>
+                            <input type="number" value=1 min=0 max=1000 class="col-6 col-sm-3 form-control" name="{{ sim_form.num_storage_locations.name }}" id="{{ sim_form.num_storage_locations.auto_id }}">
+                            {{ sim_form.num_storage_locations.errors }}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            refreshFields();
+
+            //open the optional parameters section when the + button is clicked
+            $('#toggleOptionsButton').on('click', function () {
+                $('#option-fields').toggle();
+            });
+
+            //refresh the disabled fields whenever a non-disabled field is changed
+            //or a new code type is selected
+            $('select').change(refreshFields);
+            $('input:not([readonly])').change(refreshFields);
+
+            //enable the popovers on the input fields
+            $(function () {
+                $('[data-toggle="popover"]').popover({trigger: 'focus', placement: 'bottom', html:true}                                    )
+            })
+        });
+
+
+    </script>
+
+{% endblock %}

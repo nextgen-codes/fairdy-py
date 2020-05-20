@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}User Index{% endblock %}
+
+{% block content %}
+    <style>
+    input[type=checkbox] {
+        background-color: black;
+        color: black;
+    }
+
+    </style>
+
+    <div class="col">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">username</th>
+                    <th scope="col">email</th>
+                    <th scope="col">is staff?</th>
+                    <th scope="col">email valid?</th>
+                    <th scope="col">pw locked?</th>
+                    <th scope="col">created</th>
+                    <th scope="col">last login</th>
+                    <th scope="col">block cycle limit</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fairdy_user in page_obj.object_list %}
+                <tr>
+                    <td>{{ fairdy_user.user.username }}</td>
+                    <td>{{ fairdy_user.user.email }}</td>
+                    <td><input type="checkbox" {% if fairdy_user.user.is_staff %} checked {% endif %} disabled></td>
+                    <td><input type="checkbox" {% if fairdy_user.is_valid_email %} checked {% endif %} disabled></td>
+                    <td><input type="checkbox" {% if fairdy_user.is_password_expired %} checked {% endif %} disabled></td>
+                    <td>{{ fairdy_user.user.date_joined|date:"d-M-Y H:i" }}</td>
+                    <td>{{ fairdy_user.user.last_login|date:"d-M-Y H:i" }}</td>
+                    {% if fairdy_user.block_cycle_limit == -1 %}
+                    <td>unlimited</td>
+                    {% else %}
+                    <td>{{ fairdy_user.get_bcl_millions }} million</td>
+                    {% endif %}
+                    <td>
+
+                        <button class="button btn-sm btn-primary"
+                                onclick="showModal({{ fairdy_user.user_id }},'{{ fairdy_user.user.username }}','{{ fairdy_user.user.email }}','{{ fairdy_user.user.is_staff }}',{{ fairdy_user.get_bcl_millions }})">
+                            edit
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page=1">Previous</a>
+                    </li>
+                {% endif %}
+
+                {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_num == page_obj.number %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{% url 'accounts:user_edit' %}">
+                        <div class="modal-body">
+                            <h5 id="modalUserName"></h5>
+                            <h5><a id="modalEmail" href="#"></a> </h5>
+                            <hr>
+                            {% csrf_token %}
+                            <input type="hidden" value="" name="user_id" id="modalUserId">
+                            <div class="form-group row">
+                                <label for="block_cycle_limit" class="col-5 col-form-label">Block Cycle Limit:</label>
+                                <input type="number" class="col-3 form-control" name="block_cycle_limit" id="modalBlockCycleLimit">
+                                <p class="pl-2">million</p>
+                                <ul>
+                                    <li>
+                                        <small class="form-text text-muted pl-3">value of -1 allows this user to run unlimited simulations</small>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group row">
+                                <label for="is_staff" class="col-5 col-form-label">Is Staff?</label>
+                                <input type="checkbox" class="col-5 form-control" name="is_staff" id="modalIsStaff" value="True">
+                                <ul>
+                                    <li>
+                                        <small class="col-12 form-text text-muted pl-3">grants unlimited simulations (block cycle limit = -1)</small>
+                                    </li>
+                                    <li>
+                                        <small class="col-12 form-text text-muted pl-3">grants ability to edit users on this page</small>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        function showModal(user_id, user_name, email, is_staff, block_cycle_limit) {
+            $('#modalUserId').val(user_id);
+            $('#modalUserName').text(user_name);
+            $('#modalEmail').attr('href', 'mailto:' + email);
+            $('#modalEmail').text(email);
+            is_staff = (is_staff == 'True' ? true : false);
+            if (is_staff) {
+                $('#modalIsStaff').prop('checked', true);
+                disableBCL();
+            } else {
+                enableBCL(block_cycle_limit);
+            }
+            $('#editUserModal').modal('show');
+        }
+
+        $('#modalIsStaff').on('change', function(event) {
+           if ($(this).is(':checked')) {
+               disableBCL();
+           } else {
+               enableBCL();
+           }
+        });
+
+        function disableBCL() {
+            $('#modalBlockCycleLimit').val(-1);
+            $('#modalBlockCycleLimit').prop('readonly', true);
+        }
+
+        function enableBCL(bcl = 50) {
+            $('#modalBlockCycleLimit').val(bcl);
+            $('#modalBlockCycleLimit').prop('readonly', false);
+        }
+
+    </script>
+
+{% endblock %}

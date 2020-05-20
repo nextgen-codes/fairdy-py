@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Delete Account{% endblock %}
+
+{% block content %}
+    <div class="col-xl-6 col-lg-8">
+        <div>
+            <h4>Are you sure you want to delete your account on fairdy.no?</h4>
+            <p>
+                We will remove your email and username from our database.
+            </p>
+            <p>
+                The simulations you have run will remain in our database,
+                however they will no longer be associated with your account details.
+            </p>
+            <p>
+                Please enter your password and click confirm if you wish to continue.
+            </p>
+            <form method="post" action="{% url 'accounts:delete' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+                <div class="form-group text-right">
+                    <a class="btn btn-primary" href="{% url 'accounts:profile' %}">Cancel</a>
+                    <input type="submit" class="btn btn-danger" value="Confirm">
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

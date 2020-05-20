@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+    <div class="col-xl-4 col-lg-6 col-md-8">
+        <div class="card">
+            <div class="card-header">
+                Register
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'accounts:register' %}">
+
+
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        {% if field.name == 'agree_to_conditions' %}
+                            <div class="form-group">
+                                Terms and Conditions:
+                                <ul class="list-group">
+                                    <li class="list-group-item">This website uses cookies to optimize user experience by storing information about your session.</li>
+                                    <li class="list-group-item">This website will store your username and email, as well as timestamps associated with registration, login, use, etc.</li>
+                                    <li class="list-group-item">The simulations you run will be publicly visible with your username, your email will only be visible to website administrators.</li>
+                                    <li class="list-group-item">You may delete your account at any time by going to your profile and following the 'Delete Account' link.</li>
+                                    <li class="list-group-item">After you delete your account, all simulations you have run will remain in our database, but without any reference to your former account or personal data.</li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" name="{{ field.html_name }}">
+                                    <label class="form-check-label" for="{{ field.html_name }}">{{ field.label }}</label>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <div class="form-group">
+                                {{ field }}
+                            </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <p class="form-text" style="color: red">{{ error }}</p>
+                        {% endfor %}
+                        {% if field.help_text and field.errors %}
+                            <p class="form-text" style="color: grey">{{ field.help_text }}</p>
+                        {% endif %}
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>
+            </div>
+            <div class="card-body">
+                <a class="card-link" href="{% url 'accounts:forgot_password' %}">Forgot password?</a>
+                <a class="card-link" href="{% url 'accounts:login' %}">Log in?</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(':checkbox').change(function(){
+            cb = $(this);
+            if (cb.prop('checked')) {
+                cb.val(true);
+            }
+
+        });
+    </script>
+
+{% endblock %}

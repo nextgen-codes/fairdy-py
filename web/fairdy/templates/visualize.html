@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <style>
+        /* special css to reverse columns and rows in table */
+            table {
+                display: table;
+            }
+            table tr {
+                display: table-cell;
+            }
+            table tr td, table tr th {
+                display: block;
+            }
+        </style>
+
+        <div class="col">
+
+            <img src="data:image/png;base64,{{ graph }}" class="img-fluid">
+            <table class="table table-sm">
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>blocks per stripe</th>
+                    <th>number of stripes</th>
+                    <th>blocks in system</th>
+                    <th>number of cycles</th>
+                    <th>user</th>
+                    <th>lazy heal threshold</th>
+                    <th>storage location mode</th>
+                    <th>number of storage locations</th>
+                </tr>
+                {% for sim in sims %}
+                <tr>
+                    <th>{{ sim }}</th>
+                    <td><a href="{% url 'fairdy:visualize' %}?id={{ sim.id }}">simulation {{ sim.id }}</a></td>
+                    <td><strong>{{ sim.k_value }}</strong> data + <strong>{{ sim.m_value }}</strong> redundancy = <strong>{{ sim.n_value }}</strong> total</td>
+                    <td>{{ sim.num_stripes }}</td>
+                    <td><strong>{{ sim.num_blocks_in_system }}</strong> = (<strong>{{ sim.n_value }}</strong> blocks per stripe * <strong>{{ sim.num_stripes }}</strong> stripes)</td>
+                    <td>{{ sim.num_cycles }}</td>
+                    {% with username=sim.fairdy_user.user.username %}
+                    <td><a href="{% url 'fairdy:index' %}?username={{ username }}">{{ username  }}</a></td>
+                    {% endwith %}
+                    <td>{{ sim.lazy_heal_threshold }}</td>
+                    <td>{{ sim.storage_location_mode }}</td>
+                    <td>{{ sim.num_storage_locations }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+{% endblock %}

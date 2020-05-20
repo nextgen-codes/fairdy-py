@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <style>
+            body {
+              padding-top: 5rem;
+            }
+        </style>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+            });
+        </script>
+        <title>FaiRDy {% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <!--TOP NAVIGATION BAR-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href={% url 'fairdy:index' %}>FaiRDy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">Erasure Codes</a>
+                        <div class="dropdown-menu">
+                            {% for code in installed_codes %}
+                                {% if request.code_type.name == code.name %}
+                                    <a class="dropdown-item" href="/fairdy/{{ code.name|lower }}">{{code.label}}</a>
+                                {% else %}
+                                    <a class="dropdown-item" href="/fairdy/{{ code.name|lower }}">{{code.label}}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">Documentation</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'fairdy:help_getting_started' %}">Getting Started</a>
+                            <a class="dropdown-item" href="{% url 'fairdy:help_run_simulation' %}">Running Simulations</a>
+                            <a class="dropdown-item" href="{% url 'fairdy:help_compare_download' %}">Compare and Download</a>
+                                      <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'accounts:help_create_account' %}">Create Account</a>
+                            <a class="dropdown-item" href="{% url 'accounts:help_manage_account' %}">Manage Account</a>
+                            {% if request.user.is_staff %}
+                            <a class="dropdown-item" href="{% url 'accounts:help_manage_users' %}">Manage Users</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <div class="dropdown-divider"></div>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                            {{ request.user.username }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'fairdy:index' %}?username={{ user.username }}">My Simulations</a>
+                            <a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}">Log out</a>
+                            {% if request.user.is_staff %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'accounts:user_index' %}">User Admin</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Log In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="container-fluid">
+
+            <!-- Message banner -->
+            {% if messages %}
+                <ul class="messages pl-0 pt-2">
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible fade show {{ message.tags }}" role="alert">
+                        <strong>{{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+                </ul>
+            {% endif %}
+            {% block content %}{% endblock %}
+
+        </main>
+
+    </body>
+</html>

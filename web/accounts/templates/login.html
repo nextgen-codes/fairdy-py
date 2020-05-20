@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+<div class="col-xl-4 col-lg-6 col-md-8">
+    <div class="card">
+        <div class="card-header">
+            Log in
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'accounts:login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" autofocus type="text" name="username" id="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                </div>
+                {% if form.errors %}
+                    <p class="form-text" style="color:red">
+                        Your username and password didn't match. Please try again.
+                    </p>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </div>
+        <div class="card-body">
+            <a class="card-link" href="{% url 'accounts:forgot_password' %}">Forgot password?</a>
+            <a class="card-link" href="{% url 'accounts:register' %}">Register?</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
