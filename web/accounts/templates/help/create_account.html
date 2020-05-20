@@ -1,10 +1,18 @@
-{% extends "base.html" %}
+{% extends "help.html" %}
 {% block title %}Documentation - Create Account{% endblock %}
 
-{% block content %}
+{% block content_help %}
+    <style>
+        ol > li {
+            padding-top: 1em;
+        }
+
+    </style>
+
     <div class="col-12">
         <div>
-            <h2>How to create an account on this website.</h2>
+            <h1 class="display-4">How to create an account on this website.</h1>
+            <hr>
             <ol>
                 <li><strong>Go to the <a href="{% url 'accounts:register' %}">registration</a> page.</strong></li>
                 <li>

@@ -227,25 +227,29 @@
     </div>
     <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            refreshFields();
+    $(document).ready(function () {
+        refreshFields();
 
-            //open the optional parameters section when the + button is clicked
-            $('#toggleOptionsButton').on('click', function () {
-                $('#option-fields').toggle();
-            });
-
-            //refresh the disabled fields whenever a non-disabled field is changed
-            //or a new code type is selected
-            $('select').change(refreshFields);
-            $('input:not([readonly])').change(refreshFields);
-
-            //enable the popovers on the input fields
-            $(function () {
-                $('[data-toggle="popover"]').popover({trigger: 'focus', placement: 'bottom', html:true}                                    )
-            })
+        //open the optional parameters section when the + button is clicked
+        $('#toggleOptionsButton').on('click', function () {
+            $('#option-fields').toggle();
         });
 
+        //refresh the disabled fields whenever a non-disabled
+        //field is changed or a new code type is selected
+        $('select').change(refreshFields);
+        $('input:not([readonly])').change(refreshFields);
+
+        //enable the popovers on the input fields
+        $(function () {
+            $('[data-toggle="popover"]')
+                .popover({
+                    trigger: 'focus',
+                    placement: 'bottom',
+                    html:true
+                });
+        });
+    });
 
     </script>
 

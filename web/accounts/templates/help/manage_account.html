@@ -1,23 +1,27 @@
-{% extends "base.html" %}
+{% extends "help.html" %}
 {% load static %}
 {% block title %}Documentation - Manage Account{% endblock %}
 
-{% block content %}
+{% block content_help %}
     <div class="col col-md-8">
         <div>
-            <h2>Manage your FaiRDy account</h2>
-            <h4>User Menu</h4>
+            <h1 class="display-4">Manage your FaiRDy account</h1>
+            <hr>
+            <h3>User Menu</h3>
             <p>
                 The user menu is located in the upper right corner of the page. Before logging in,
                 Sign Up and Log In links are shown. After logging in, the username is displayed with
                 an icon to open a drop-down menu.
             </p>
-            <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu.png' %}" alt="user menu">
-            <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu_small_screen.png' %}" alt="user menu">
-            <table>
+            <div>
+                <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu.png' %}" alt="user menu">
+                <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu_small_screen.png' %}" alt="user menu">
+            </div>
+            <small>the user menu on large and small screens</small>
+            <table class="table table-sm d-inline-block pt-4">
                 <tr>
                     <th>My Simulations</th>
-                    <td>shows all simulations run with your account</td>
+                    <td>shows a history of all simulations run with your account</td>
                 </tr>
                 <tr>
                     <th>Profile</th>
@@ -29,7 +33,8 @@
                 </tr>
             </table>
 
-            <h4>Profile Page</h4>
+            <hr>
+            <h3>Profile Page</h3>
             <p>
                 When logged in, you can access your
                 {% if user.is_authenticated %}
