@@ -52,8 +52,9 @@ def about_simulation(request):
 # If new codes are added to web app, this function must be updated,
 # together with Simulation.Codes and Simulation.__str__
 def run_module_simulation(web_sim):
-    # REED SOLOMON and REPLICATION
-    if web_sim.code_type in (Simulation.Codes.REED_SOLOMON, Simulation.Codes.REPLICATION):
+    # STANDARD CODES
+    standard_codes = [Simulation.Codes.REED_SOLOMON, Simulation.Codes.REPLICATION]
+    if web_sim.code_type in standard_codes:
         module_sim = fairdypy.Reed_solomon(
             word_blocks=web_sim.k_value,
             extra_blocks=web_sim.m_value,
@@ -121,6 +122,7 @@ def initialize_gp(request, web_sim, sim_form, gpc_form):
     else:
         messages.error(request, gpc_form.non_field_errors())
         return render(request, 'form.html', {'base_form': sim_form, 'gpc_form': gpc_form})
+
 
 def run_simulation(request):
     check_valid_user(request)
