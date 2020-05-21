@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Help{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block">
+                <ul class="nav flex-column">
+                    <li>FaiRDy-Py</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fairdy:help_getting_started' %}">Getting Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fairdy:help_run_simulation' %}">Running Simulations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fairdy:help_compare_download' %}">Compare and Download</a>
+                    </li>
+                    <hr>
+                    <li>Accounts</li>
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:help_create_account' %}">Create Account</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:help_manage_account' %}">Manage Account</a>
+                    </li>
+                    {% if request.user.is_staff %}
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:help_manage_users' %}">Manage Users</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+            <div class="col-12 col-md-10">
+                {% block content_help %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
