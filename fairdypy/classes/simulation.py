@@ -143,6 +143,8 @@ class Simulation():
     def _update_baf(self):
         pass
 
+
+
     def loop_simulation(self, loops, baf_limit=0.0, p_error=0.2):
         # initialize and check p_error array
         if isinstance(p_error, float):
@@ -154,6 +156,10 @@ class Simulation():
                 ).format(
                     len_p_error=len(p_error),
                     loops=loops))
+        
+        #check that p_error is between 0 and 1
+        _p_error_check(p_error=p_error)
+
         if self.verbose:
             print("loop simulation started with:\n\tloops: ", loops)
             if self.lazy_heal_threshold_vert is not None:
@@ -236,3 +242,15 @@ class Simulation():
 
         if self.verbose:
             print("Finished ", loops, " loops")
+
+
+def _p_error_check(p_error):
+    for i, _ in enumerate(p_error):
+        if(p_error[i] < 0 or
+           p_error[i] > 1):
+            raise ValueError((
+                "p_error ({p_err} at index {index}) can not be larger "
+                "than 1 or smaller than zero"
+                ).format(
+                    p_err=p_error[i],
+                    index=i))
