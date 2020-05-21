@@ -128,13 +128,16 @@
 
                 <!--  DEFINE SIMULATION PARAMETERS SECTION  -->
                 <div class="card-header">
-                    Simulation Parameters
+                    Simulation and Storage System Parameters
                 </div>
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="form-group row">
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.num_stripes.name }}">{{ sim_form.num_stripes.label }}:</label>
-                            <input type="number" min=0 class="col-6 col-sm-3 form-control" name="{{ sim_form.num_stripes.name }}" id="{{ sim_form.num_stripes.auto_id }}">
+                            <input type="number" min=0 class="col-6 col-sm-3 form-control" data-toggle="popover"
+                                   data-content="<img src='{% static 'fairdy/stripes_in_sim.svg' %}'></img>"
+                                   title="the number of times the stripe you defined will be repeated to form a complete system"
+                                    name="{{ sim_form.num_stripes.name }}" id="{{ sim_form.num_stripes.auto_id }}">
                             {{ sim_form.num_stripes.errors }}
                         </div>
                         <div class="form-group row">
@@ -145,7 +148,7 @@
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.num_cycles.name }}">{{ sim_form.num_cycles.label }}:</label>
                             <input type="number" min=0 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                    data-content="<img src='{% static 'fairdy/cycles.svg' %}'></img>"
-                                   title="each cycle has two stages, fault-injection and fault repair"
+                                   title="each cycle has two steps:<br> a. fault injection<br>b. repair"
                                    name="{{ sim_form.num_cycles.name }}" id="{{ sim_form.num_cycles.auto_id }}">
                             {{ sim_form.num_cycles.errors }}
                         </div>
@@ -182,7 +185,10 @@
                                     <small class="form-text text-muted">
                                         vertical
                                     </small>
-                                    <input type="number" value=1 min=1 max=10000 class="form-control" name="{{ gpc_form.lazy_heal_threshold_ver.name }}" id="{{ gpc_form.lazy_heal_threshold_ver.auto_id }}">
+                                    <input type="number" value=1 min=1 max=10000 class="form-control" data-toggle="popover"
+                                   data-content="<img src='{% static 'fairdy/lazy_heal.svg' %}'></img>"
+                                   title="The lazy heal threshold determines if a certain number of blocks must be damaged before a stripe, or sub-stripe, is repaired."
+                                     name="{{ gpc_form.lazy_heal_threshold_ver.name }}" id="{{ gpc_form.lazy_heal_threshold_ver.auto_id }}">
                                 </div>
                             </div>
 
@@ -191,7 +197,10 @@
                                 <small class="form-text text-muted gpc-fields">
                                     horizontal
                                 </small>
-                                <input type="number" value=1 min=1 max=10000 class="form-control" name="{{ sim_form.lazy_heal_threshold.name }}" id="{{ sim_form.lazy_heal_threshold.auto_id }}">
+                                <input type="number" value=1 min=1 max=10000 class="form-control" data-toggle="popover"
+                                   data-content="<img src='{% static 'fairdy/lazy_heal.svg' %}'></img>"
+                                   title="The lazy heal threshold determines if a certain number of blocks must be damaged before a stripe, or sub-stripe, is repaired."
+                                    name="{{ sim_form.lazy_heal_threshold.name }}" id="{{ sim_form.lazy_heal_threshold.auto_id }}">
 
 
                             </div>

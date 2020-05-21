@@ -1,4 +1,5 @@
 {% extends "help.html" %}
+{% load static %}
 {% block title %}Documentation - Getting Started{% endblock %}
 {% block content_help %}
 
@@ -6,33 +7,166 @@
     <div class="col-12">
         <div>
             <h1 class="display-3">Getting Started</h1>
-            <p>Here you will find a quick overview of key concepts central to FaiRDy and this website.</p>
+            <p>
+                FaiRDy is a lightweight approach to simulate the failure-repair dynamics of storage systems and explore
+                the effects of different redundancy strategies and parameters on system degradation. FaiRDy is based on cellular automata,
+                the blocks of storage system data are represented as cells, which can either be available or unavailable. The simulations
+                are run in two-part cycles, in the first half of the cycle, cells are randomly marked as unavailable according to the
+                specified probability of failure. In the second half of the cycle, the unavailable blocks are repaired
+                where possible according to rules of the erasure code.
+            </p>
+            <p>
+                Here you will find a quick overview of key concepts central to FaiRDy and this website.
+            </p>
 
             <hr>
             <h3>Cellular Automata</h3>
             <p>
                 A cellular automaton (pl. cellular automata, abbrev. CA) is a collection of boolean
-                cells, also referred to as blocks in FaiRDy-Py, which together form a system. This system
-                is then evolved over a set of discrete time cycles, with the state of a block in a given cycle
+                cells, also referred to as blocks in fairdy-py, which together form a system. This system
+                is then evolved through a set of discrete time cycles, with the state of a block in a given cycle
                 determined by its neighbors' states in the previous cycle.
+            </p>
+            <p>
+                In FaiRDy the CA represents a digital storage system, and the individual cells represent
+                blocks of data contained within this system. To begin with, all data blocks in the system are considered
+                available, however in the first step of each time cycle blocks are randomly marked as unavailable by a fault-
+                injection module, using a pre-specified probability of failure, to simulate real world events which lead
+                to data loss. In the second step of time cycle, an attempt is made to repair the failures introduced in the
+                first step,  whether or not this is successful is determined by a set of rules specific to the erasure code
+                being modelled.
             </p>
 
             <hr>
             <h3>Erasure Codes</h3>
             <p>
+                An erasure code encodes redundancy into a stream of data, this in turn ensures the
+                data is recoverable even if certain blocks in the stream are erased or otherwise unavailable. Optimal
+                 erasure codes enable recovery of data up to the point that the number of erased blocks equals the number of
+                redundancy blocks.
+            </p>
+            <p>
+                In FaiRDy we define a <em>stripe</em> in terms of the dimensions of the erasure code to be investigated. After the
+                stripe is defined, a specified amount of stripes are concatenated to form a complete storage system model which is
+                then cycled between fault-injection and repair to gain insight into the storage system's properties.
+            </p>
 
+
+            <hr>
+            <h4>n-way replication</h4>
+            <p>
+                N-way replication is the most simple way to store data redundantly, and in FaiRDy a n-way replication
+                stripe consists of a single data block, and n complete replicas.
+            </p>
+            <p>
+                Repair Rules:<br>
+                A n-way replication stripe is considered repairable if at least one copy of the data is not erased.
+            </p>
+            <div class="row">
+                <div class="col-8 col-lg-6 col-xl-4">
+                    <img class="img-fluid" src="{% static 'fairdy/replication.svg' %}" alt="rs">
+                </div>
+                <div class="col-4 col-lg-3 col-xl-2">
+                    <img class="img-fluid" src="{% static 'fairdy/key_data_block.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_copy.svg' %}">
+                </div>
+            </div>
+            <small>example: a two-way replication stripe with 3 blocks total: 1 for data, and 2 for copies of the data</small>
+
+
+
+            <hr>
+            <h4>Reed-Solomon codes</h4>
+            <p>
+                Reed-Solomon codes are optimal erasure codes, and tolerate a number of block erasures equal to the number of
+                redundancy blocks in the stripe. In real storage systems the contents of the redundancy blocks are computed
+                and decoded using advanced linear algebra, this is however ignored in FaiRDy and a stripe will be repaired
+                as long as enough active blocks remain to allow this.
+            </p>
+            <p>
+                Repair Rules:<br>
+                A Reed-Solomon stripe is considered repairable as long as the number of erased blocks does not exceed
+                the number of redundancy blocks.
+            </p>
+
+            <h6>RS(5,4)</h6>
+            <div class="row">
+                <div class="col-8 col-lg-6 col-xl-4">
+                    <img class="img-fluid" src="{% static 'fairdy/rs.svg' %}" alt="rs">
+                </div>
+                <div class="col-4 col-lg-3 col-xl-2">
+                    <img class="img-fluid" src="{% static 'fairdy/key_data_block.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red.svg' %}">
+                </div>
+            </div>
+            <small>example: a Reed-Solomon stripe with 9 blocks total: 5 for data, and 4 for redundancy</small>
+
+
+            <hr>
+            <h4>Generalized Pyramid codes</h4>
+            <p>
+                Generalized Pyramid codes are composed of up to two different Reed-Solomon stripe shapes, on in the vertical
+                direction and one in the horizontal direction. This provides an extra layer of protection since each data block
+                is a member of two different Reed-Solomon stripes, with each providing a possibility for repair. Two different
+                Generalized Pyramid code stripe constructions are possible in FaiRDy, standard non-overlapping with the blocks
+                 arranged in the shape of a hexagon, and an overlapping with the blocks arrange in the shape of a rectangle. The
+                overlapping construction adds an additional dimension of redundancy, with the overlapping redundancy blocks computed
+                using the vertically redundant as data input blocks.
+            </p>
+            <p>
+                Repair Rules:<br>
+                A Generalized Pyramid stripe is considered repairable as long as some combination of
+                vertical and horizontal sub-stripes are repairable according to Reed-Solomon rules to restore
+                all data blocks.
             </p>
 
             <hr>
-            <h3>FaiRDy Framework</h3>
-            <p>
-
+            <h5>non-overlapping</h5>
+            <p> The number of horizontal stripes is equal to the number of DATA blocks in the vertical stripes, and correspondingly, the
+                number of vertical stripes is equal to the number of DATA blocks in horizontal stripes.
             </p>
+            <h6>GPC(20,6) H:{3, 4} V:{2, 2}</h6>
+            <div class="row">
+                <div class="col-8 col-lg-6 col-xl-4">
+                    <img class="img-fluid" src="{% static 'fairdy/gpc.svg' %}" alt="gpc">
+                </div>
+                <div class="col-4 col-lg-3 col-xl-2">
+                    <img class="img-fluid" src="{% static 'fairdy/key_data_block.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red_hor.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red_vert.svg' %}">
+                </div>
+            </div>
+            <small>example: a non-overlapping Generalized Pyramid stripe with 20 blocks total: 6 for data, and 14 for redundancy</small>
+
+            <hr>
+            <h5>overlapping</h5>
+            <p>
+                The number of horizontal stripes is equal to the TOTAL number of blocks in the vertical stripe, and correspondingly, the
+                number of vertical stripes is equal to the TOTAL number of blocks in the horizontal stripe. The overlapping redundancy
+                blocks are computed using the vertical redundancy blocks as the input data blocks, and thereby provide second degree
+                redundancy.
+            </p>
+            <h6>GPC(28,6) H:{3, 4} V:{2, 2}</h6>
+            <div class="row">
+                <div class="col-8 col-lg-6 col-xl-4">
+                    <img class="img-fluid" src="{% static 'fairdy/gpc_overlap.svg' %}" alt="gpc overlap">
+                </div>
+                <div class="col-4 col-lg-3 col-xl-2">
+                    <img class="img-fluid" src="{% static 'fairdy/key_data_block.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red_hor.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red_vert.svg' %}">
+                    <img class="img-fluid" src="{% static 'fairdy/key_red_over.svg' %}">
+                </div>
+            </div>
+            <small>an overlapping Generalized Pyramid stripe with 28 blocks total: 6 for data, and 22 for redundancy</small>
 
             <hr>
             <h3>How Simulations Work</h3>
             <p>
-
+                Simulations are carried out in a dedicated Python module that can also be used on the command line to
+                simulate the life cycles of storage systems. This module uses numpy arrays to store the state of the individual
+                blocks and stripes, and cycles through fault-injection and fault-repair steps to simulate the evolution of the
+                storage system.
             </p>
 
             <hr>
@@ -43,6 +177,12 @@
                 </li>
                 <li>
                     <a href="https://en.wikipedia.org/wiki/Cellular_automaton">Cellular Automaton, on Wikipedia</a>
+                </li>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Erasure_code">Erasure Code, on Wikipedia</a>
+                </li>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed-Solomon Codes, on Wikipedia</a>
                 </li>
             </ul>
 

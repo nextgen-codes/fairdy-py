@@ -66,7 +66,7 @@ class Simulation(models.Model):
         validators=[MinValueValidator(1)]
     )
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True)
     fairdy_user = models.ForeignKey(
         FairdyUser,
         on_delete=models.SET_NULL,

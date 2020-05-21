@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1175 273" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xml:space="preserve"
+     style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="Artboard1" transform="matrix(1.00342,0,0,1.05417,0,-272.467)">
+        <rect x="0" y="258.467" width="1171" height="258.467" style="fill:none;"/>
+        <g id="rect10-63" transform="matrix(4.15248,0,0,3.95257,-946.902,-23.8648)">
+            <rect x="232.085" y="75.229" width="56.693" height="56.693" style="fill:rgb(250,162,106);stroke:black;stroke-width:1.5px;"/>
+        </g>
+        <g transform="matrix(39.4877,0,0,30.7381,-1733.54,-2613.1)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(16.294,0,0,12.6836,-597.377,-794.891)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">o</text>
+        </g>
+        <g transform="matrix(0.996596,0,0,0.948618,-49.4664,223.788)">
+            <text x="372.04px" y="150.215px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:100px;">redundancy blocks</text>
+            <text x="372.04px" y="253.486px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:100px;">(overlapping)</text>
+        </g>
+    </g>
+</svg>

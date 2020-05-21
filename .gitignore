@@ -6,3 +6,6 @@ test.py
 *__pycache__*
 
 *.code-workspace
+
+.idea
+/web/.idea

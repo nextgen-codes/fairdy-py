@@ -85,19 +85,20 @@ def run_module_simulation(web_sim):
 
 
 # helper method to redirect if accounts app is enabled, and the user is not logged in
-def check_valid_user(request):
+def is_valid_user(request):
     if settings.USE_ACCOUNTS_APP:
         if request.user.is_anonymous:
             messages.error(request, 'You must log in before running simulations.')
-            return redirect('fairdy:index')
+            return False
         else:
             fairdy_user = FairdyUser.objects.get(user_id=request.user.id)
-            if not fairdy_user.is_valid_email:
+            if settings.REQUIRE_EMAIL_VERIFICATION and not fairdy_user.is_valid_email:
                 messages.error(request, 'You must validate your email before running simulations.')
-                return redirect('fairdy:index')
+                return False
+    return True
 
 
-def check_enough_bcc(request, fairdy_user, web_sim):
+def user_has_enough_bcc(fairdy_user, web_sim):
     # if the accounts app is turned off, ignore null fairdy_user
     if not fairdy_user:
         if not settings.USE_ACCOUNTS_APP:
@@ -105,49 +106,54 @@ def check_enough_bcc(request, fairdy_user, web_sim):
         else:
             return False
     # Check user has enough block cycle credits available to run this simulation
-    if fairdy_user.can_run_simulation(web_sim):
+    elif settings.ENFORCE_BLOCK_CYCLE_LIMIT and fairdy_user.can_run_simulation(web_sim):
         return True
-    # Otherwise return an error message
     else:
-        messages.error(request, 'You do not have enough block cycle credits to run this simulation, '
-                                'ask the administrator to raise your limit.')
-        return redirect('fairdy:index')
+        return False
 
 
-def initialize_gp(request, web_sim, sim_form, gpc_form):
+def initialize_gp(web_sim, gpc_form):
     if gpc_form.is_valid():
         gpc_sim = gpc_form.save(commit=False)
         gpc_sim.simulation = web_sim
         gpc_sim.save()
+        return True
     else:
-        messages.error(request, gpc_form.non_field_errors())
-        return render(request, 'form.html', {'base_form': sim_form, 'gpc_form': gpc_form})
+        return False
 
 
 def run_simulation(request):
-    check_valid_user(request)
+    if not is_valid_user(request):
+        return redirect('fairdy:index')
+
     if request.method == 'POST':
         sim_form = SimulationForm(request.POST)
         gpc_form = PyramidSimulationForm(request.POST)
         fairdy_user = FairdyUser.objects.get(user_id=request.user.id)
+
         if sim_form.is_valid():
             web_sim = sim_form.save(commit=False)
+
             # check the user has enough credits to run the sim, or is exempt
-            check_enough_bcc(request, fairdy_user, web_sim)
+            if not user_has_enough_bcc(fairdy_user, web_sim):
+                messages.error(request, 'You do not have enough block cycle credits to run this simulation, '
+                                        'ask the administrator to raise your limit.')
+                return redirect('fairdy:index')
             web_sim.fairdy_user = fairdy_user
             web_sim.start_time = timezone.now()
-            web_sim.end_time = timezone.datetime.max
-            web_sim.save()
+
             # deal with extra fields required by pyramid codes
-            if web_sim.code_type == Simulation.Codes.GENERALIZED_PYRAMID:
-                initialize_gp(request, web_sim, sim_form, gpc_form)
+            if web_sim.code_type == Simulation.Codes.GENERALIZED_PYRAMID and not initialize_gp(web_sim, gpc_form):
+                messages.error(request, gpc_form.non_field_errors())
+                return render(request, 'form.html', {'base_form': sim_form, 'gpc_form': gpc_form})
+
             # try running simulation
             try:
                 module_sim = run_module_simulation(web_sim)
                 if len(module_sim.baf_history) is 0:
                     messages.error(request, 'There was a problem running the simulation')
                     return render(request, 'form.html', {'base_form': sim_form, 'gpc_form': gpc_form})
-
+                web_sim.save()
                 cycles = (Cycle(
                         simulation=web_sim,
                         block_availability_factor=module_sim.baf_history[cycle],

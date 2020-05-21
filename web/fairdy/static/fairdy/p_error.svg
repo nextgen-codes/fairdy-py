@@ -1,504 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-        xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        sodipodi:docname="p_error.svg"
-        inkscape:version="1.0 (4035a4f, 2020-05-01)"
-        id="svg2829"
-        version="1.1"
-        viewBox="0 0 97.588356 50.11544"
-        height="50.11544mm"
-        width="97.588356mm">
-  <defs
-     id="defs2823">
-    <linearGradient
-       gradientTransform="matrix(0.47354165,0,0,0.47354165,20.906096,13.575597)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       id="linearGradient887"
-       osb:paint="solid">
-      <stop
-         style="stop-color:#000000;stop-opacity:1;"
-         offset="0"
-         id="stop885" />
-    </linearGradient>
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-90"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354165,0,0,0.47354165,68.260257,13.575597)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-1"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,30.376928,13.575597)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-7"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,39.847766,13.575599)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-5"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,49.318594,13.575598)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-9"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,58.789425,13.575599)" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,77.731087,13.575599)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-90-0"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,87.201919,13.5756)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-90-4"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,96.672756,13.5756)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-90-45"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,106.14359,13.575599)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-90-8"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-8"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,20.906094,40.452483)" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,68.260254,40.452483)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-90-47"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,30.376924,40.452483)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-1-0"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,39.847764,40.452485)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-7-4"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,49.318594,40.452484)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-5-0"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,58.789424,40.452485)"
-       inkscape:collect="always"
-       xlink:href="#linearGradient887"
-       id="linearGradient889-9-6"
-       x1="21.874504"
-       y1="36.539001"
-       x2="41.874504"
-       y2="36.539001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-90-0-5"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,77.731084,40.452485)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-90-4-3"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,87.201914,40.452486)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-90-45-8"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,96.672754,40.452486)" />
-    <linearGradient
-       gradientUnits="userSpaceOnUse"
-       y2="36.539001"
-       x2="41.874504"
-       y1="36.539001"
-       x1="21.874504"
-       id="linearGradient889-90-8-5"
-       xlink:href="#linearGradient887"
-       inkscape:collect="always"
-       gradientTransform="matrix(0.47354164,0,0,0.47354164,106.14358,40.452485)" />
-  </defs>
-  <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="23"
-     inkscape:window-x="4480"
-     inkscape:window-height="1174"
-     inkscape:window-width="1252"
-     fit-margin-right="1"
-     fit-margin-bottom="1"
-     fit-margin-left="1"
-     fit-margin-top="1"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="410.20925"
-     inkscape:cx="335.29655"
-     inkscape:zoom="1.002905"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <metadata
-     id="metadata2826">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(-30,-14.366266)"
-     id="layer1"
-     inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
-    <rect
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889);stroke-width:0.529167"
-       id="rect10"
-       width="9.4708328"
-       height="9.4708328"
-       x="31.264584"
-       y="26.142918" />
-    <rect
-       y="26.142918"
-       x="78.618744"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-63"
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90);stroke-width:0.529167" />
-    <text
-       id="text3067"
-       y="23.215891"
-       x="30.756048"
-       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         style="stroke-width:0.264583"
-         y="23.215891"
-         x="30.756048"
-         id="tspan3065"
-         sodipodi:role="line">p_error = 0.1</tspan></text>
-    <rect
-       y="26.142918"
-       x="40.735416"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-5"
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-1);stroke-width:0.529167" />
-    <rect
-       y="26.142918"
-       x="50.206249"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-8"
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-7);stroke-width:0.529167" />
-    <rect
-       y="26.142918"
-       x="59.677082"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-7"
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-5);stroke-width:0.529167" />
-    <rect
-       y="26.142918"
-       x="69.147911"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-6"
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-9);stroke-width:0.529167" />
-    <rect
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-0);stroke-width:0.529167"
-       id="rect10-63-1"
-       width="9.4708328"
-       height="9.4708328"
-       x="88.089577"
-       y="26.14292" />
-    <rect
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-4);stroke-width:0.529167"
-       id="rect10-63-8"
-       width="9.4708328"
-       height="9.4708328"
-       x="97.56041"
-       y="26.14292" />
-    <rect
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-45);stroke-width:0.529167"
-       id="rect10-63-9"
-       width="9.4708328"
-       height="9.4708328"
-       x="107.03123"
-       y="26.14292" />
-    <rect
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-8);stroke-width:0.529167"
-       id="rect10-63-5"
-       width="9.4708328"
-       height="9.4708328"
-       x="116.50208"
-       y="26.14292" />
-    <text
-       transform="scale(1.016424,0.98384138)"
-       id="text3185"
-       y="37.004684"
-       x="57.543617"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264584"
-       xml:space="preserve"><tspan
-         sodipodi:role="line"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264584"
-         y="37.004684"
-         x="57.543617"
-         id="tspan3183">x</tspan></text>
-    <rect
-       y="53.019806"
-       x="31.264584"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-1"
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-8);stroke-width:0.529167" />
-    <rect
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-47);stroke-width:0.529167"
-       id="rect10-63-2"
-       width="9.4708328"
-       height="9.4708328"
-       x="78.618744"
-       y="53.019806" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="30.756044"
-       y="50.092773"
-       id="text3067-4"><tspan
-         sodipodi:role="line"
-         id="tspan3065-6"
-         x="30.756044"
-         y="50.092773"
-         style="stroke-width:0.264583">p_error = 0.5</tspan></text>
-    <rect
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-1-0);stroke-width:0.529167"
-       id="rect10-5-7"
-       width="9.4708328"
-       height="9.4708328"
-       x="40.735416"
-       y="53.019806" />
-    <rect
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-7-4);stroke-width:0.529167"
-       id="rect10-8-5"
-       width="9.4708328"
-       height="9.4708328"
-       x="50.206242"
-       y="53.019806" />
-    <rect
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-5-0);stroke-width:0.529167"
-       id="rect10-7-5"
-       width="9.4708328"
-       height="9.4708328"
-       x="59.677082"
-       y="53.019806" />
-    <rect
-       style="fill:#ffff00;fill-rule:evenodd;stroke:url(#linearGradient889-9-6);stroke-width:0.529167"
-       id="rect10-6-0"
-       width="9.4708328"
-       height="9.4708328"
-       x="69.147903"
-       y="53.019806" />
-    <rect
-       y="53.019806"
-       x="88.089569"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-63-1-5"
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-0-5);stroke-width:0.529167" />
-    <rect
-       y="53.019806"
-       x="97.56041"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-63-8-2"
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-4-3);stroke-width:0.529167" />
-    <rect
-       y="53.019806"
-       x="107.03124"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-63-9-0"
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-45-8);stroke-width:0.529167" />
-    <rect
-       y="53.019806"
-       x="116.50208"
-       height="9.4708328"
-       width="9.4708328"
-       id="rect10-63-5-7"
-       style="fill:#00ff00;fill-rule:evenodd;stroke:url(#linearGradient889-90-8-5);stroke-width:0.529167" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="57.543617"
-       y="64.322998"
-       id="text3185-7"
-       transform="scale(1.016424,0.98384139)"><tspan
-         id="tspan3183-9"
-         x="57.543617"
-         y="64.322998"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264583"
-         sodipodi:role="line">x</tspan></text>
-    <text
-       transform="scale(1.016424,0.98384139)"
-       id="text3185-7-3"
-       y="64.52433"
-       x="76.017273"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         sodipodi:role="line"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264583"
-         y="64.52433"
-         x="76.017273"
-         id="tspan3183-9-0">x</tspan></text>
-    <text
-       transform="scale(1.016424,0.98384139)"
-       id="text3185-7-9"
-       y="64.52433"
-       x="85.620781"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         sodipodi:role="line"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264583"
-         y="64.52433"
-         x="85.620781"
-         id="tspan3183-9-07">x</tspan></text>
-    <text
-       transform="scale(1.016424,0.98384139)"
-       id="text3185-7-6"
-       y="64.25618"
-       x="38.901054"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         sodipodi:role="line"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264583"
-         y="64.25618"
-         x="38.901054"
-         id="tspan3183-9-8">x</tspan></text>
-    <text
-       transform="scale(1.016424,0.98384139)"
-       id="text3185-7-38"
-       y="64.52433"
-       x="113.13351"
-       style="font-style:normal;font-weight:normal;font-size:20.2833px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         sodipodi:role="line"
-         style="font-size:20.2833px;fill:#ff0000;stroke-width:0.264583"
-         y="64.52433"
-         x="113.13351"
-         id="tspan3183-9-6">x</tspan></text>
-  </g>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 277 143" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="Layer-1" serif:id="Layer 1" transform="matrix(1,0,0,1,-85.0394,-40.7233)">
+        <rect id="rect10-1" x="88.624" y="150.292" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-2" x="222.856" y="150.292" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-5-7" x="115.47" y="150.292" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-8-5" x="142.317" y="150.292" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-7-5" x="169.163" y="150.292" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-6-0" x="196.01" y="150.292" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-1-5" x="249.703" y="150.292" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-8-2" x="276.549" y="150.292" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-9-0" x="303.396" y="150.292" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-5-7" x="330.242" y="150.292" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <g transform="matrix(3.10334,0,0,2.74788,-44.8877,-101.405)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,-18.0412,-101.405)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,8.80523,-101.405)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,35.6517,-101.405)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,62.4981,-101.405)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,66.4569,-149.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,93.3034,-149.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,120.15,-149.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,146.996,-149.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,173.843,-149.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <rect id="rect10" x="88.624" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63" x="222.856" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-5" x="115.47" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-8" x="142.317" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-7" x="169.163" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-6" x="196.01" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-1" x="249.703" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-8" x="276.549" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-9" x="303.396" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <rect id="rect10-63-5" x="330.242" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+        <g transform="matrix(3.63578,0,0,3.21933,173.843,-226.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,62.4981,-177.591)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,35.6517,-177.591)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,8.80525,-177.591)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,-18.0412,-177.591)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.10334,0,0,2.74788,-44.8877,-177.591)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,66.4569,-226.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,93.3034,-226.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,121.457,-226.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(3.63578,0,0,3.21933,148.303,-226.436)">
+            <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">r</text>
+        </g>
+        <g transform="matrix(1,0,0,1,87.1825,65.8088)">
+            <g id="text3067">
+                <text x="0px" y="0px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:30px;">p_error = 0.1</text>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,1,87.1825,141.995)">
+            <g id="text3067-4">
+                <text x="0px" y="0px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:30px;">p_error = 0.5</text>
+            </g>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,141.912,176.139)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,222.451,176.139)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,249.298,176.139)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,329.837,176.139)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,141.912,99.9524)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+        <g transform="matrix(1.15236,0,0,0.998225,168.758,176.139)">
+            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:48px;fill:rgb(255,4,0);">x</text>
+        </g>
+    </g>
 </svg>

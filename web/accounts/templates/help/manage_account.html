@@ -7,17 +7,31 @@
         <div>
             <h1 class="display-4">Manage your FaiRDy account</h1>
             <hr>
-            <h3>User Menu</h3>
+            <ul>
+                <li><a href="#user_menu">User Menu</a> </li>
+                <li>
+                    <a href="#profile_page">Profile Page</a>
+                    <ul>
+                        <li><a href="#remaining_credits">Remaining Credits</a> </li>
+                        <li><a href="#email_validation">Email Validation</a> </li>
+                    </ul>
+                </li>
+                <li><a href="#delete_account">Delete Account</a> </li>
+                <li><a href="#forgot_password">Forgot Password</a> </li>
+            </ul>
+
+            <h3 id="user_menu">User Menu</h3>
             <p>
                 The user menu is located in the upper right corner of the page. Before logging in,
                 Sign Up and Log In links are shown. After logging in, the username is displayed with
                 an icon to open a drop-down menu.
             </p>
-            <div>
-                <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu.png' %}" alt="user menu">
-                <img class="img-fluid img-thumbnail" src="{% static 'accounts/user_menu_small_screen.png' %}" alt="user menu">
+            <div class="pt-4">
+                <img class="img-fluid" src="{% static 'accounts/user_menu.png' %}" alt="user menu">
+                <img class="img-fluid" src="{% static 'accounts/user_menu_small_screen.png' %}" alt="user menu">
             </div>
             <small>the user menu on large and small screens</small>
+
             <table class="table table-sm d-inline-block pt-4">
                 <tr>
                     <th>My Simulations</th>
@@ -34,7 +48,7 @@
             </table>
 
             <hr>
-            <h3>Profile Page</h3>
+            <h3 id="profile_page">Profile Page</h3>
             <p>
                 When logged in, you can access your
                 {% if user.is_authenticated %}
@@ -46,14 +60,53 @@
                 links to update your username, email, and password. If you wish to delete your account, you
                 will find the link at the bottom of your profile page.
             </p>
+            <div class="pt-4 pb-4">
+                <img class="img-fluid img-thumbnail p-4" src="{% static 'accounts/profile.png' %}" alt="profile">
+            </div>
 
-            <h6>Remaining Credits</h6>
-            <p>While </p>
-
-            <h4>Forgotten Password</h4>
+            <h5 id="remaining_credits">Remaining Credits</h5>
             <p>
-
+                While FaiRDy is a lightweight framework for characterizing the reliability of storage systems
+                over their lifecycle, it still requires a certain amount of compute and memory to process the simulations.
+                For this reason and because the server is hosted on hardware at the University of Stavanger, new accounts
+                have a <em>Block Cycle Limit</em>, which limits the amount of simulations within a month. Block Cycle Limit
+                is calculated as the size of the storage system (in blocks) multiplied by the number of cycles. New accounts
+                have a default Block Cycle Limit of 500 million, your remaining credits are shown with a progress bar on
+                your profile page. Considering that most systems reveal few additional insights after 100 cycles, the default
+                limit allows you to run 100 simulations with up to 50,000 total blocks in each system. This should be sufficient
+                for most, but please contact us if you would like to request an increase in your limit.
             </p>
+
+            <h5 id="email_validation">Email Validation</h5>
+            <p>
+                You will not be able to run simulation until you verify your email address by clicking a link we email to you.
+                If you have not received a validation email, check your spam folder, or use the links on your profile page to
+                send a new confirmation or change your email address. Note that changing your email will require you validate the
+                new email address before running any simulations.
+            </p>
+
+            <h3 id="delete_account">Delete Account</h3>
+            <p>
+                If you wish to delete your FaiRDy account we will remove all of your personal information from our database.
+                Either follow the link in your profile page, or click <a href="{% url 'accounts:delete' %}">here</a>. The
+                simulations you have ran with your account will remain in our database, but they will no longer be associated
+                with your former username. You must enter your password to delete your account, if you have forgotten your
+                password, first reset your password <a href="{% url 'accounts:forgot_password' %}">here</a>, then follow the
+                delete link from your profile page after validating your email.
+            </p>
+
+            <h3 id="forgot_password">Forgot Password</h3>
+            <p>
+                If you have forgotten your password, go to the <a href="{% url 'accounts:forgot_password' %}">forgot password</a>
+                page and enter your username. You will receive a validation email, and upon following the link it contains you
+                will be able to reset the password for your account.
+            </p>
+            <div class="pt-4 pb-4">
+                <img class="img-fluid img-thumbnail p-4" src="{% static 'accounts/forgot_password.png' %}">
+            </div>
+
+
+
         </div>
     </div>
 

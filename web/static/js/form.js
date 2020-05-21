@@ -46,6 +46,12 @@ function refreshRS() {
     let k_val = parseInt($('#id_k_value').val())
     let n_val = m_val + k_val;
 
+    $('#id_k_value').attr('data-content', '<img src="/static/fairdy/rs_k.svg">');
+    $('#id_k_value').attr('title', 'The number of equally sized data blocks per stripe');
+
+    $('#id_m_value').attr('data-content', '<img src="/static/fairdy/rs_m.svg">');
+    $('#id_m_value').attr('title', 'The number of equally sized redundancy blocks per stripe');
+
     $('#id_n_value').val(n_val);
     $('#id_n_value').attr('readonly', true);
 }
@@ -57,7 +63,7 @@ function refreshREP() {
     $('#id_n_value').val(n_val);
     $('#id_n_value').attr('readonly', true);
 
-    $('#id_m_value').attr('data-content', 'the number of replications');
+    $('#id_m_value').attr('data-content', 'The number of copies of the single data block to include in the stripe');
 
     $('#id_k_value').val(1);
     $('#id_k_value').attr('readonly', true);

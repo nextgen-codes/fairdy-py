@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 114 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="Artboard1" transform="matrix(0.405694,0,0,0.780488,0,-19.5122)">
+        <rect x="0" y="25" width="281" height="41" style="fill:none;"/>
+        <clipPath id="_clip1">
+            <rect x="0" y="25" width="281" height="41"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g id="Layer-1" serif:id="Layer 1" transform="matrix(2.46491,0,0,1.28125,-209.615,-66.8954)">
+                <g id="rect10-63" transform="matrix(1,0,0,1,-104,0.194137)">
+                    <rect x="222.856" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+                </g>
+                <g id="rect10-6" transform="matrix(1,0,0,1,-107,0.194134)">
+                    <rect x="196.01" y="74.106" width="26.846" height="26.846" style="fill:rgb(255,255,0);stroke:black;stroke-width:1.5px;"/>
+                </g>
+                <g id="rect10-63-1" transform="matrix(1,0,0,1,-101,0.194131)">
+                    <rect x="249.703" y="74.106" width="26.846" height="26.846" style="fill:rgb(0,255,0);stroke:black;stroke-width:1.5px;"/>
+                </g>
+                <g transform="matrix(4.61281,-3.35257,2.7417,3.77231,-358.543,-133.155)">
+                    <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:2.633px;fill:rgb(166,166,166);fill-opacity:0.61;">copy</text>
+                </g>
+                <g transform="matrix(4.61281,-3.35257,2.7417,3.77231,-328.72,-133.155)">
+                    <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:2.633px;fill:rgb(166,166,166);fill-opacity:0.61;">copy</text>
+                </g>
+                <g transform="matrix(3.10334,0,0,2.74788,-44.5019,-177.397)">
+                    <text x="44.239px" y="100.707px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;fill:rgb(166,166,166);fill-opacity:0.61;">d</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

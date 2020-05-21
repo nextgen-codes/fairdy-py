@@ -20,7 +20,7 @@ class FairdyUserManager(models.Manager):
 
 class FairdyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    block_cycle_limit = models.IntegerField(default=50000000)  # The number of "block cycles" allowed per time unit
+    block_cycle_limit = models.IntegerField(default=500000000)  # The number of "block cycles" allowed per month
     is_valid_email = models.BooleanField()
     is_password_expired = models.BooleanField()
     token = models.CharField(max_length=128)

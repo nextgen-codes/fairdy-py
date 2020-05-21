@@ -1,14 +1,74 @@
 {% extends "help.html" %}
+{% load static %}
 {% block title %}Documentation - Manage Users{% endblock %}
 
 {% block content_help %}
     <div class="col-12">
         <div>
-            <h2>Only users marked as 'staff' in the DB can see this page.</h2>
-            <ol>
-                    <h3>Set Block Cycle Limit</h3>
+            <h1 class="display-4">Manage FaiRDy Users</h1>
+            <p>
+                This help page, and the user management page are hidden from all accounts which are not marked
+                "is staff".
+            </p>
+            <hr>
+            <h3>Accessing Page</h3>
+            <p>
+                You can access the user management page by clicking <a href="{% url 'accounts:help_manage_users' %}">here</a>
+                or by clicking the link in the user menu, which is only visible for accounts marked as "is staff".
+            </p>
+            <div>
+                <img class="img-fluid" src="{% static 'accounts/user_index_menu.png' %}" alt="user menu">
+            </div>
 
-            </ol>
+            <hr>
+            <h3>User Index Page</h3>
+            <p>
+                From this page it is possible to view all users who have registered for this website and various details about
+                their account.
+            </p>
+            <div>
+                <img class="img-fluid" src="{% static 'accounts/user_index.png' %}" alt="user index">
+            </div>
+            <table class="table table-sm">
+                <tr>
+                    <th>is staff?</th>
+                    <td>determines whether the user as access to this user administration page</td>
+                </tr>
+                <tr>
+                    <th>email valid?</th>
+                    <td>whether the user has followed the linke in their email and validated the account</td>
+                </tr>
+                <tr>
+                    <th>pw locked?</th>
+                    <td>the user has attempted to reset their password (forgot password), and the process has not been completed</td>
+                </tr>
+                <tr>
+                    <th>block cycle limit</th>
+                    <td>limit on the number of simulations the user can run on a one month rolling basis</td>
+                </tr>
+            </table>
+
+            <h5>Block Cycle Limit</h5>
+            <p>
+                All new accounts have a <em>Block Cycle Limit</em>, which limits the amount of simulations the account
+                can run on a one month rolling basis. Block Cycle Limit is calculated as the size of the storage system (in blocks)
+                multiplied by the number of cycles. New accounts have a default Block Cycle Limit of 500 million.
+                The default limit allows up to 100 simulations with up to 50,000 total blocks in each system, 100 cycles each.
+                <strong>Enter -1 to give a user an unlimited block cycle limit.</strong> This is an integer field with a max. value
+                of 2,147,483,647. Enter your choice in millions, it will be automatically multiplied by the web framework.
+            </p>
+
+            <hr>
+            <h3>Edit User Dialog</h3>
+            <p>
+                To access the edit user dialog simply click the 'edit' button on the user record.
+            </p>
+            <div>
+                <img src="{% static 'accounts/user_index_dialog.png' %}" alt="user edit dialog">
+            </div>
+            <p>
+                From within the dialog it is possible to modify the user's block cycle limit and 'is staff' setting.
+            </p>
 
         </div>
     </div>
