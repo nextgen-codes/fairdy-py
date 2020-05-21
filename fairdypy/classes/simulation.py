@@ -4,6 +4,7 @@ import random
 
 
 class Simulation():
+    """The Simulation object, used as a buildingblock for other erasure codes"""
     def __init__(
             self,
             #block settings
@@ -13,8 +14,8 @@ class Simulation():
             storage_fault_mode=None,
             num_of_storage=None,
             #heal/repair settings
-            lazy_heal_threshold_hor=None,
-            lazy_heal_threshold_vert=None,
+            lazy_heal_threshold_hor=1,
+            lazy_heal_threshold_vert=1,
             repair_cycle=1,
             #history storage settings
             include_history=False,
@@ -52,6 +53,7 @@ class Simulation():
         self.num_of_storage = num_of_storage
         self._storage_check()
         self._create_storage_fault_array()
+        self._type_check()
 
         # Other setting variables:
         self.baf = 1
@@ -64,6 +66,7 @@ class Simulation():
         return str(self.array)
 
     def _storage_check(self):
+        """Checks if storage settings correspond to each other"""
         if self.storage_fault_mode is not None:
             if not (self.storage_fault_mode in ["random", "equal_shuffle", "hash_block_index", "custom"]):
                 raise ValueError("storage_fault_mode must be \"random\", \"equal_shuffle\", \"hash_block_index\" or \"custom\"")
@@ -71,8 +74,27 @@ class Simulation():
             raise ValueError("storage_fault_mode must be set to enable num_of_storage")
         if self.storage_fault_mode is not None and self.num_of_storage is None:
             raise ValueError("num_of_storage must be set if storage_fault_mode is chosen")
+    
+    def _type_check(self):
+        """Checks type for some simple inputs"""
+        if not isinstance(self.num_of_stripes, int):
+            raise ValueError((
+                "num_of_stripes ({numstr}) must be an integer"
+                ).format(
+                    numstr=self.num_of_stripes))
+        if not isinstance(self.num_of_storage, int):
+            raise ValueError((
+                "num_of_storage ({numstor}) must be an integer"
+                ).format(
+                    numstor=self.num_of_storage))
+        if not isinstance(self.repair_cycle, int):
+            raise ValueError((
+                "repair_cycle ({repcy}) must be an integer"
+                ).format(
+                    repcy=self.repair_cycle))
 
     def _create_storage_fault_array(self):
+        """Creates an array containing the indexes for each block"""
         if self.storage_fault_mode == "random":
             # places the blocks randomly into storages
             # storages can be of varying sizes
@@ -109,6 +131,7 @@ class Simulation():
             return
 
     def _fault_injection(self, p_error):
+        """Injects failures into the array"""
         #Fault only for valid blocks
         if self.num_of_storage is not None and self.storage_fault_mode is not None:
             # create empty fault array
@@ -146,6 +169,15 @@ class Simulation():
 
 
     def loop_simulation(self, loops, baf_limit=0.0, p_error=0.2):
+        """ loop_simulation runs the actual simulation
+
+        loops int: controls the amount of loops to run before finishing.
+        baf_limit float: sets a block availibility factor limit for stoppint the simulation
+        before the total amount of loops have completed
+        p_error float, [float]: is the chance a block or storage location will fail during
+        simulation. If specified as an array, the array must be the same length as number of loops.
+        and will then use the error with index corresponding to loop.
+        """
         # initialize and check p_error array
         if isinstance(p_error, float):
             p_error = np.full(loops, p_error, dtype=np.float64)
@@ -245,6 +277,7 @@ class Simulation():
 
 
 def _p_error_check(p_error):
+    """Checks if the p_error is between 0 and 1"""
     for i, _ in enumerate(p_error):
         if(p_error[i] < 0 or
            p_error[i] > 1):

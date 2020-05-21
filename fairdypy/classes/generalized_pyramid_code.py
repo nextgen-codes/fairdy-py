@@ -1,7 +1,21 @@
 import numpy as np
 from .simulation import Simulation
 class Generalized_pyramid_code(Simulation):
-    #TODO class hints
+    """Creates a Generalized pyramid code object to run simulations on.
+
+    gpc_defition (int, int): gpc total blocks and wordblocks in the gpc (total blocks, word blocks)
+    horizontal_rs (int, int): word blocks and extra blocks in horizontal RS stripes in the gpc (word blocks, extra blocks)
+    vertical_rs (int, int): word blocks and extra blocks in vertical RS stripes in the gpc (word blocks, extra blocks)
+    num_of_stripes (int): number of stripes in the gpc
+    lazy_heal_threshold_hor (int): number of blocks who have to fail in a stripe before healing horizontally
+    lazy_heal_threshold_vert (int): number of blocks who have to fail in a stripe before healing vertically
+    repair_cycle (int): how many repair cycle to run over the gpc
+    storage_fault_mode (["random", "equal_shuffle", "hash_block_index", "custom"]): choses the storage fault mode
+    num_of_storage (int): number of storage locations
+    include_history (bool): True if you want to include all history after each heal
+    include_fault_history (bool): Ture if you want to include all fault history after each fault injection
+    verbose (bool): True if printouts while running
+    """
     def __init__(
             self,
             # block definitions
@@ -141,10 +155,12 @@ class Generalized_pyramid_code(Simulation):
 
     
     def _update_baf(self):
+        """Updates BAF for GPC"""
         # accounting for empty blocks
         self.baf = np.sum(np.multiply(self.array, (self.array == 1))) / (self.gpc_totalblocks * self.num_of_stripes)
 
     def _initiate_empty_blocks(self):
+        """Initiates empty blocks for none-overlapping GPC"""
         if self.overlap_type == "full":
             return
         arranged = np.reshape(self.array, (self.num_of_stripes, self.vertical_length, self.horizontal_length))
@@ -156,6 +172,7 @@ class Generalized_pyramid_code(Simulation):
             ] = -(self.horizontal_length + self.vertical_length)
  
     def _self_vertical_heal(self):
+        """Heals for vertical stripes"""
         for i, stripe in enumerate(self.array):
             #one stripe at a time, reshape it for easy access
             structured_stripe = np.reshape(stripe, (self.vertical_length, self.horizontal_length))
@@ -177,6 +194,7 @@ class Generalized_pyramid_code(Simulation):
             self.array[i] = (structured_stripe + anti_structured_stripe).ravel()
 
     def _self_horizontal_heal(self):
+        """Heals for horizontal stripes"""
         for i, stripe in enumerate(self.array):
             structured_stripe = np.reshape(stripe, (self.vertical_length, self.horizontal_length))
             anti_structured_stripe = 1 - (structured_stripe != 0)
