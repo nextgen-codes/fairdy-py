@@ -69,7 +69,9 @@ class Simulation():
         """Checks if storage settings correspond to each other"""
         if self.storage_fault_mode is not None:
             if not (self.storage_fault_mode in ["random", "equal_shuffle", "hash_block_index", "custom"]):
-                raise ValueError("storage_fault_mode must be \"random\", \"equal_shuffle\", \"hash_block_index\" or \"custom\"")
+                raise ValueError((
+                    "storage_fault_mode must be \"random\", "
+                    "\"equal_shuffle\", \"hash_block_index\" or \"custom\""))
         if self.storage_fault_mode is None and self.num_of_storage is not None:
             raise ValueError("storage_fault_mode must be set to enable num_of_storage")
         if self.storage_fault_mode is not None and self.num_of_storage is None:
@@ -97,7 +99,6 @@ class Simulation():
         """Creates an array containing the indexes for each block"""
         if self.storage_fault_mode == "random":
             # places the blocks randomly into storages
-            # storages can be of varying sizes
             fault_array = [
                 random.randint(1, self.num_of_storage)
                 for block in range(self.num_of_stripes * self.blocks)
