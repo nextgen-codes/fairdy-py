@@ -114,6 +114,7 @@ def user_has_enough_bcc(fairdy_user, web_sim):
 
 def initialize_gp(web_sim, gpc_form):
     if gpc_form.is_valid():
+        web_sim.save()
         gpc_sim = gpc_form.save(commit=False)
         gpc_sim.simulation = web_sim
         gpc_sim.save()
@@ -167,7 +168,8 @@ def run_simulation(request):
                 return redirect(web_sim)
 
             except ValueError as error:
-                web_sim.delete()
+                if web_sim:
+                    web_sim.delete()
                 messages.error(request, error)
 
     else:    # = request.method is NOT POST
