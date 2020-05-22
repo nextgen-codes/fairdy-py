@@ -54,6 +54,7 @@ class Simulation():
         self._storage_check()
         self._create_storage_fault_array()
         self._type_check()
+        self._threshold_check()
 
         # Other setting variables:
         self.baf = 1
@@ -130,6 +131,25 @@ class Simulation():
             # if storage_fault_mode is set to custom then a custom fault_Array
             # can be provided after initiating the simulation object.
             return
+
+    def _threshold_check(self):
+        if self.horizontal_extrablocks != 0 and self.horizontal_extrablocks is not None:
+            if self.lazy_heal_threshold_hor > self.horizontal_extrablocks:
+                raise ValueError((
+                    "Lazy heal horizontal threshold ({h_thresh}) "
+                    "can not be larger than the number of extra blocks ({h_extr})"
+                    ).format(
+                        h_thresh=self.lazy_heal_threshold_hor,
+                        h_extr=self.horizontal_extrablocks))
+        if self.vertical_extrablocks != 0 and self.vertical_extrablocks is not None:
+            if self.lazy_heal_threshold_vert > self.vertical_extrablocks:
+                raise ValueError((
+                    "Lazy heal vertical threshold ({v_thresh}) "
+                    "can not be larger than the number of extra blocks ({v_extr})"
+                    ).format(
+                        v_thresh=self.lazy_heal_threshold_vert,
+                        v_extr=self.vertical_extrablocks
+                    ))
 
     def _fault_injection(self, p_error):
         """Injects failures into the array"""

@@ -59,7 +59,7 @@ class Generalized_pyramid_code(Simulation):
         self._check_overlap()
         self._self_test_gpc()
         self._initiate_empty_blocks()
-        self._gpc_threshold_check()
+        
 
     def _check_overlap(self):
         # if the GPC total blocks is equal to the full square (horizontal times vertical) then there is full overlap.
@@ -84,12 +84,14 @@ class Generalized_pyramid_code(Simulation):
                 print("overlap_type is partial")
 
     def _self_test_gpc(self):
+        # wordblocks cannot be negative or zero
         if self.vertical_wordblocks <= 0:
             raise ValueError("Vertical_wrodblocks cannot be less than or equal to 0")
 
         if self.horizontal_wordblocks <= 0:
             raise ValueError("Horizontal_wordblocks cannot be less than or equal to 0")
 
+        # wordblocks cannot be greater than total blocks
         if  self.gpc_wordblocks > self.gpc_totalblocks:
             raise ValueError((
                 "gpc_wordblocks ({gpc_word}) cannot be larger than "
@@ -98,6 +100,7 @@ class Generalized_pyramid_code(Simulation):
                 gpc_word=self.gpc_wordblocks,
                 gpc_total=self.gpc_totalblocks))
 
+        # if total blocks equal wordblocks, there cannot be any extra blocks
         if self.gpc_totalblocks == self.gpc_wordblocks:
             if self.horizontal_extrablocks != 0 or self.vertical_extrablocks != 0:
                 raise ValueError((
@@ -110,6 +113,7 @@ class Generalized_pyramid_code(Simulation):
                     hor_ex=self.horizontal_extrablocks,
                     vert_ex=self.vertical_extrablocks))
 
+        # word blocks must match horizontal and vertical wordblock definition
         if self.gpc_wordblocks != (self.horizontal_wordblocks * self.vertical_wordblocks):
             raise ValueError((
                 "gpc_worblocks ({gpc_word}) not equal to product "
@@ -118,6 +122,7 @@ class Generalized_pyramid_code(Simulation):
                     gpc_word=self.gpc_wordblocks,
                     rs_product=(self.horizontal_wordblocks * self.vertical_wordblocks)))
 
+        # total blocks cannot be greater than square size of horizontal and vertical length
         if self.gpc_totalblocks > (self.horizontal_length * self.vertical_length):
             raise ValueError((
                 "gpc_totalblocks ({gpc_tot}) cannot be larger than "
@@ -125,29 +130,12 @@ class Generalized_pyramid_code(Simulation):
                 ).format(
                     gpc_tot=self.gpc_totalblocks,
                     rs_tot=(self.horizontal_length * self.vertical_length)))
-
+        
+        # for partial overlaps vertical stipes must be full
         if self.vertical_extrablocks != 0 and self.overlap_type != 'full':
             if (self.gpc_totalblocks - (self.horizontal_length * self.vertical_wordblocks)) % self.vertical_extrablocks != 0:
                 raise ValueError("Can only add full vertical RS for partial overlaps")
 
-    def _gpc_threshold_check(self):
-        if self.horizontal_extrablocks != 0:
-            if self.lazy_heal_threshold_hor > self.horizontal_extrablocks:
-                raise ValueError((
-                    "Lazy heal horizontal threshold ({h_thresh}) "
-                    "can not be larger than the number of extra blocks ({h_extr})"
-                    ).format(
-                        h_thresh=self.lazy_heal_threshold_hor,
-                        h_extr=self.horizontal_extrablocks))
-        if self.vertical_extrablocks != 0:
-            if self.lazy_heal_threshold_vert > self.vertical_extrablocks:
-                raise ValueError((
-                    "Lazy heal vertical threshold ({v_thresh}) "
-                    "can not be larger than the number of extra blocks ({v_extr})"
-                    ).format(
-                        v_thresh=self.lazy_heal_threshold_vert,
-                        v_extr=self.vertical_extrablocks
-                    ))
     
     def __str__(self):
         return str(np.reshape(self.array, (self.num_of_stripes, self.vertical_length, self.horizontal_length)))
