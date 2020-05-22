@@ -85,7 +85,7 @@ class Simulation():
                 "num_of_stripes ({numstr}) must be an integer"
                 ).format(
                     numstr=self.num_of_stripes))
-        if not isinstance(self.num_of_storage, int):
+        if not isinstance(self.num_of_storage, int) and self.num_of_storage is not None:
             raise ValueError((
                 "num_of_storage ({numstor}) must be an integer"
                 ).format(
