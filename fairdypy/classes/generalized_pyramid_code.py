@@ -52,7 +52,7 @@ class Generalized_pyramid_code(Simulation):
         self.gpc_totalblocks = gpc_definition[0]
         self.gpc_wordblocks = gpc_definition[1]
         self.square_size = self.horizontal_length * self.vertical_length
-        self.is_fully_overlapping = True if (self.gpc_totalblocks == (self.horizontal_length * self.vertical_length)) else False
+        self.is_fully_overlapping = True if (self.gpc_totalblocks == self.square_size) else False
         self.empty_blocks = 0 if self.is_fully_overlapping else self.square_size - self.gpc_totalblocks
         self.non_empty_blocks = self.gpc_totalblocks if self.is_fully_overlapping else self.gpc_totalblocks - self.empty_blocks
         self._type = "generalized_pyramid_code"
