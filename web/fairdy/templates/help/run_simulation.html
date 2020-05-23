@@ -147,10 +147,11 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <p>
-                        The number of steps the repair module takes to heal stripes in each cycle. The first
-                        step repairs all Reed-Solomon stripes running in the horizontal direction including overlapping
-                        blocks if they exist, the second step repairs all Reed-Solomon stripes running in the vertical direction,
-                        and the third again repairs in the vertical direction.
+                        The number of repair steps completed in a single cycle.
+                    </p>
+                    <p>
+                        A single repair step heals Reed-Solomon sub-stripes first vertically, and then horizontally.
+                        You may choose to repeat the repair step up to three times in an individual cycle.
                     </p>
                 </div>
             </div>
