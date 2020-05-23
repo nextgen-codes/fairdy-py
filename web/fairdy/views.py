@@ -106,7 +106,7 @@ def user_has_enough_bcc(fairdy_user, web_sim):
         else:
             return False
     # Check user has enough block cycle credits available to run this simulation
-    elif settings.ENFORCE_BLOCK_CYCLE_LIMIT and fairdy_user.can_run_simulation(web_sim):
+    elif settings.USE_ACCOUNTS_APP and settings.ENFORCE_BLOCK_CYCLE_LIMIT and fairdy_user.can_run_simulation(web_sim):
         return True
     else:
         return False
@@ -238,10 +238,10 @@ def visualize(request):
         # if simulation goes to 0 before completing all cycles,
         # it is necessary to add 0 baf measurements to the list so the graph is complete
         if len(y) < max_cycle_count:
-            y = list(y) + ([0] * (max_cycle_count - len(y)))
+            y = list(y) + ([None] * (max_cycle_count - len(y)))
         x = range(max_cycle_count)
         pyplot.plot(x, y)
-        labels.append('{}'.format(str(sim)))
+        labels.append('{}, sim{}'.format(str(sim), sim.id))
     pyplot.legend(labels)
     pyplot.xlim(0, max_cycle_count - 1)
     pyplot.ylim(0, 1.1)

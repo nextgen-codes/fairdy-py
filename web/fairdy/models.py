@@ -28,40 +28,42 @@ class Simulation(models.Model):
         choices=Codes.choices
     )
     k_value = models.PositiveIntegerField(
-        '(k) data blocks per stripe',
+        '(k) data',
         validators=[MinValueValidator(1)]
     )
     m_value = models.PositiveIntegerField(
-        '(m) redundancy blocks per stripe',
+        '(m) redundancy',
         validators=[MinValueValidator(1)]
     )
     n_value = models.PositiveIntegerField(
-        '(n) total blocks per stripe',
+        '(n) total',
         validators=[MinValueValidator(1)]
     )
     num_stripes = models.PositiveIntegerField(
-        'stripes per simulation',
+        'Stripes per Storage System',
         validators=[MinValueValidator(1)]
     )
     num_cycles = models.PositiveIntegerField(
-        'number of cycles',
+        'Number of Cycles',
         validators=[MinValueValidator(1)]
     )
     p_error = models.FloatField(
-        '(p_error) probability of block failure',
+        '(p_error) Probability of Block Failure',
         validators=[MinValueValidator(0), MaxValueValidator(1)]
     )
     storage_location_mode = models.CharField(
+        'Storage Location Mode',
         max_length=50,
         choices=StorageLocationModes.choices,
         blank=True,
         null=True
     )
     num_storage_locations = models.PositiveIntegerField(
-        'Number of storage locations',
+        'Number of Storage Locations',
         validators=[MinValueValidator(1)]
     )
     lazy_heal_threshold = models.PositiveIntegerField(
+        'Lazy Heal Threshold',
         default=1,  # '1' for for eager heal, for GPC sims this field holds the horiz. threshold, vert. is on GPC model
         validators=[MinValueValidator(1)]
     )
@@ -107,8 +109,10 @@ class Simulation(models.Model):
         return self.num_blocks_in_system() * self.num_cycles
 
     def get_thumbnail(self):
-        max_cycle_count = self.cycle_set.count()
+        max_cycle_count = self.num_cycles + 1
         y = self.cycle_set.values_list('block_availability_factor', flat=True)
+        if len(y) < max_cycle_count:
+            y = list(y) + ([None] * (max_cycle_count - len(y)))
         x = range(0, max_cycle_count)
         pyplot.plot(x, y, linewidth=7)
         pyplot.xlim(0, max_cycle_count - 1)
@@ -129,21 +133,21 @@ class Cycle(models.Model):
 class PyramidSimulation(models.Model):
     simulation = models.OneToOneField(Simulation, on_delete=models.CASCADE)
     num_repair_cycles = models.IntegerField(
-        'repair steps per cycle',
+        'Repair Steps per Cycle',
         choices=[(1, 1), (2, 2), (3, 3)],
         default=2
     )
     k_horizontal = models.PositiveIntegerField(
-        '(k_1) data blocks in horizontal direction',
+        '(k_horizontal) data',
     )
     m_horizontal = models.PositiveIntegerField(
-        '(m_1) redundancy blocks in horizontal direction',
+        '(m_horizontal) redundancy',
     )
     k_vertical = models.PositiveIntegerField(
-        '(k_2) data blocks in vertical direction',
+        '(k_vertical) data',
     )
     m_vertical = models.PositiveIntegerField(
-        '(m_2) redundancy blocks in vertical direction',
+        '(m_vertical) redundancy',
     )
     lazy_heal_threshold_ver = models.PositiveIntegerField(
         default=1,  # default '1' for for eager heal

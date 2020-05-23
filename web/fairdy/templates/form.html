@@ -41,22 +41,28 @@
                             </select>
                             {{ sim_form.code_type.errors }}
                         </div>
+                        <hr>
 
+                        <div class="form-group row">
+                            <small class="form-text text-muted">
+                                NUMBER OF BLOCKS IN STRIPE
+                            </small>
+                        </div>
 
                         <!--STRIPE PARAMETERS-->
-                        <div class="form-group row">
+                        <div class="form-group row pl-4">
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.k_value.name }}">{{ sim_form.k_value.label }}:</label>
                             <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                    name="{{ sim_form.k_value.name }}" id="{{ sim_form.k_value.auto_id }}">
                             {{ sim_form.k_value.errors }}
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row pl-4">
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.m_value.name }}">{{ sim_form.m_value.label }}:</label>
                             <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                    name="{{ sim_form.m_value.name }}" id="{{ sim_form.m_value.auto_id }}">
                             {{ sim_form.m_value.errors }}
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row pl-4">
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ sim_form.n_value.name }}">{{ sim_form.n_value.label }}:</label>
                             <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                    name="{{ sim_form.n_value.name }}" id="{{ sim_form.n_value.auto_id }}">
@@ -65,34 +71,49 @@
 
                         <!--GPC FIELDS-->
                         <div class="gpc-fields">
+                            <hr>
+
                             <div class="form-group row">
+                                <small class="form-text text-muted">
+                                    NUMBER OF BLOCKS IN HORIZONTAL DIRECTION
+                                </small>
+                            </div>
+                            <div class="form-group row pl-4">
                                 <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.k_horizontal.name }}">{{ gpc_form.k_horizontal.label }}:</label>
                                 <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                        data-content="<img src='{% static 'fairdy/gpc_k_hor.svg' %}'></img>"
                                        name="{{ gpc_form.k_horizontal.name }}" id="{{ gpc_form.k_horizontal.auto_id }}">
                                 {{ gpc_form.k_horizontal.errors  }}
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row pl-4">
                                 <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.m_horizontal.name }}">{{ gpc_form.m_horizontal.label }}:</label>
                                 <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                        data-content="<img src='{% static 'fairdy/gpc_m_hor.svg' %}'></img>"
                                        name="{{ gpc_form.m_horizontal.name }}" id="{{ gpc_form.m_horizontal.auto_id }}">
                                 {{ gpc_form.m_horizontal.errors  }}
                             </div>
+
                             <div class="form-group row">
+                                <small class="form-text text-muted">
+                                    NUMBER OF BLOCKS IN VERTICAL DIRECTION
+                                </small>
+                            </div>
+                            <div class="form-group row pl-4">
                                 <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.k_vertical.name }}">{{ gpc_form.k_vertical.label }}:</label>
                                 <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                        data-content="<img src='{% static 'fairdy/gpc_k_ver.svg' %}'></img>"
                                        name="{{ gpc_form.k_vertical.name }}" id="{{ gpc_form.k_vertical.auto_id }}">
                                 {{ gpc_form.k_vertical.errors  }}
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row pl-4">
                                 <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.m_vertical.name }}">{{ gpc_form.m_vertical.label }}:</label>
                                 <input type="number" min=0 max=10000 class="col-6 col-sm-3 form-control" data-toggle="popover"
                                        data-content="<img src='{% static 'fairdy/gpc_m_ver.svg' %}'></img>"
                                        name="{{ gpc_form.m_vertical.name }}" id="{{ gpc_form.m_vertical.auto_id }}">
                                 {{ gpc_form.m_vertical.errors  }}
                             </div>
+
+                            <hr>
                             <div class="form-group row">
                             <label class="col-12 col-sm-9 col-form-label pl-0" for="{{ gpc_form.num_repair_cycles.name }}">{{ gpc_form.num_repair_cycles.label }}:</label>
                             <select class="col-6 col-sm-3 form-control" name="{{ gpc_form.num_repair_cycles.name }}" id="{{ gpc_form.num_repair_cycles.auto_id }}">
@@ -105,7 +126,7 @@
                             <!--GPC IS OVERLAPPING / NON-OVERLAPPING AUTO CALCULATING RADIO BUTTONS-->
                             <fieldset class="form-group">
                                 <div class="row">
-                                    <legend class="col-12 col-sm-9 col-form-label p-0">The generalized pyramid stripe you defined is: </legend>
+                                    <label class="col-12 col-sm-9 col-form-label p-0">Pyramid Stripe Classification:</label>
                                     <div class="col-6 col-sm-3">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="overlappingRadio" id="radio_overlapping" disabled>
@@ -141,7 +162,7 @@
                             {{ sim_form.num_stripes.errors }}
                         </div>
                         <div class="form-group row">
-                            <label class="col-12 col-sm-9 col-form-label pl-0" for="id_blocks_in_system">Total number of blocks in system:</label>
+                            <label class="col-12 col-sm-9 col-form-label pl-0" for="id_blocks_in_system">Total Number of Blocks in Storage System:</label>
                             <input type="number" min=0 class="col-6 col-sm-3 form-control" id="id_blocks_in_system" disabled>
                         </div>
                         <div class="form-group row">

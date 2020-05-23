@@ -37,7 +37,7 @@
             <h4 class="text-muted">Parameters</h4>
             <table class="table table-sm">
                 <tr>
-                    <th>(m) redundancy blocks per stripe</th>
+                    <th>(m) redundancy</th>
                     <td>the number of complete copies of your single data block in each stripe</td>
                 </tr>
             </table>
@@ -70,11 +70,11 @@
             <h4 class="text-muted">Parameters</h4>
             <table class="table table-sm">
                 <tr>
-                    <th>(k) data blocks per stripe</th>
+                    <th>(k) data</th>
                     <td>the number of complete copies of your single data block in each stripe</td>
                 </tr>
                 <tr>
-                    <th>(m) redundancy blocks per stripe</th>
+                    <th>(m) redundancy</th>
                     <td>the number of complete copies of your single data block in each stripe</td>
                 </tr>
             </table>
@@ -111,35 +111,57 @@
             <h4 class="text-muted">Parameters</h4>
             <table class="table table-sm">
                 <tr>
-                    <th>(n) total blocks per stripe</th>
+                    <th>(n) total</th>
                     <td>&nbsp;</td>
                     <td>the total number of blocks in the stripe, including data, copy, and computed redundancy blocks</td>
 
                 </tr>
                 <tr>
-                    <th>(k_1) data blocks in horizontal direction</th>
+                    <th>(k_horizontal) data</th>
                     <td><img class="img-fluid p-0" style="width: 10em;" src="{% static 'fairdy/gpc_k_hor.svg' %}"></td>
                     <td>the number of data blocks in the horizontal direction</td>
                 </tr>
                 <tr>
-                    <th>(m_1) redundancy blocks in horizontal direction</th>
+                    <th>(m_horizontal) redundancy</th>
                     <td><img class="img-fluid p-0" style="width: 10em;" src="{% static 'fairdy/gpc_m_hor.svg' %}"></td>
                     <td>the number of redundancy blocks in the horizontal direction</td>
                 </tr>
                 <tr>
-                    <th>(k_2) data blocks in vertical direction</th>
+                    <th>(k_vertical) data</th>
                     <td><img class="img-fluid p-0" style="width: 10em;" src="{% static 'fairdy/gpc_k_ver.svg' %}"></td>
                     <td>the number of data blocks in the vertical direction</td>
                 </tr>
                 <tr>
-                    <th>(m_2) redundancy blocks in vertical direction</th>
+                    <th>(m_vertical) redundancy</th>
                     <td><img class="img-fluid p-0" style="width: 10em;" src="{% static 'fairdy/gpc_m_ver.svg' %}"></td>
                     <td>the number of redundancy blocks in the vertical direction</td>
                 </tr>
             </table>
+            <hr>
+            <h4 class="text-muted">Repair Steps per Cycle</h4>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <img class="img-fluid p-0" src="{% static 'fairdy/heal steps.svg' %}">
+                </div>
+                <div class="col-12 col-lg-6">
+                    <p>
+                        The number of steps the repair module takes to heal stripes in each cycle. The first
+                        step repairs all Reed-Solomon stripes running in the horizontal direction including overlapping
+                        blocks if they exist, the second step repairs all Reed-Solomon stripes running in the vertical direction,
+                        and the third again repairs in the vertical direction.
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <h4 class="text-muted">Pyramid Stripe Classification</h4>
+            <p>
+                This field is always closed for user input and attempts to determine whether the parameters you have
+                entered can be interpreted as an overlapping or non-overlapping Generalized Pyramid stripe.
+            </p>
+
 
             <hr>
-            <h5>Non-Overlapping</h5>
+            <h5>Non-Overlapping GPC(20,6) H:{3, 4} V:{2, 2}</h5>
             <div class="row">
                 <div class="col-6">
                     <img class="img-fluid" src="{% static 'fairdy/gpc_form_non_overlap.png' %}" alt="n way">
@@ -160,7 +182,7 @@
             <small>example: defining a GPC(20,6) H:{3, 4} V:{2, 2} stripe with 20 blocks total: 6 for data, and 14 for redundancy</small>
 
             <hr>
-            <h5>Overlapping</h5>
+            <h5>Overlapping GPC(28,6) H:{3, 4} V:{2, 2}</h5>
             <div class="row">
                 <div class="col-6">
                     <img class="img-fluid" src="{% static 'fairdy/gpc_form_overlap.png' %}" alt="n way">
@@ -190,52 +212,106 @@
                 cycles, with each cycle consisting of both a failure-injection step, and a subsequent repair step, during which the stripe is healed if
                 the erasure-code-specific criteria are met.
             </p>
-            <h4 class="text-muted">Parameters</h4>
-            <table class="table table-sm">
-                <tr>
-                    <th>Stripes per simulation</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/stripes_in_sim.svg' %}"></td>
-                    <td>the number of times the stripe you have defined is repeated before being concatenated into a storage system</td>
-                </tr>
-                <tr>
-                    <th>Number of cycles</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/cycles.svg' %}"></td>
-                    <td>the number of two-part cycles, each with fault-injection and repair, your storage system is evolved through</td>
-                </tr>
-                <tr>
-                    <th>(p_error) probability of block failure</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/p_error.svg' %}"></td>
-                    <td>
-                        the probability an available block in the system fails in the fault injection step of an individual cycle, when
-                        an advanced storage location mode is enabled, the probability an individual storage location fails
-                    </td>
-                </tr>
-            </table>
 
+            <hr>
+            <h4 class="text-muted">Stripes per simulation</h4>
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/stripes_in_sim.svg' %}">
+                </div>
+                <div class="col-6 col-lg-9">
+                    <p>the number of times the stripe you have defined is repeated before being concatenated into a storage system</p>
+                </div>
+            </div>
+
+            <hr>
+            <h4 class="text-muted">Number of cycles</h4>
+            <div class="row pl-4">
+                <div class="col-6 col-lg-3">
+                    <img class="img-fluid" style="width: 15em;" src="{% static 'fairdy/cycles.svg' %}">
+                </div>
+                <div class="col-6 col-lg-9">
+                    <p>
+                       the number of two-part cycles, each with fault-injection and repair, your storage system is evolved through
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+            <h4 class="text-muted">(p_error) probability of block failure</h4>
+            <div class="row pl-4">
+                <div class="col-6 col-lg-3">
+                    <img class="img-fluid" style="width: 15em;" src="{% static 'fairdy/p_error.svg' %}">
+                </div>
+                <div class="col-6 col-lg-9">
+                    <p>
+                       the probability an available block in the system fails in the fault injection step of an individual cycle, when
+                        an advanced storage location mode is enabled, the probability an individual storage location fails
+                    </p>
+                </div>
+            </div>
 
             <hr>
             <h1>Optional Parameters</h1>
             <p>
                 In this section you will choose supplementary advanced parameters for your simulation.
             </p>
-            <h4 class="text-muted">Parameters</h4>
-            <table class="table table-sm">
-                <tr>
-                    <th>Lazy Heal Threshold</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/lazy_heal.svg' %}"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>Storage Location Mode</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/' %}"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>Number of Storage Locations</th>
-                    <td><img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/' %}"></td>
-                    <td></td>
-                </tr>
-            </table>
+
+            <hr>
+            <h4 class="text-muted">Lazy Heal Threshold</h4>
+            <div class="row pl-4">
+                <div class="col-6 col-xl-4">
+                    <img class="img-fluid" src="{% static 'fairdy/lazy_heal.svg' %}">
+                </div>
+                <div class="col-6 col-xl-8">
+                    <p>
+                       Lazy heal delays the healing of a stripe, or sub-stripe for Generalized Pyramid systems, until
+                        the specified number of blocks are first marked as unavailable. In real-world storage systems
+                        delaying repairs in certain situations can save bandwidth and other resources, while impacting
+                        the rate of system degradation only minimally.
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+            <h4 class="text-muted">Storage Location Mode</h4>
+            <div class="row pl-4">
+                <div class="col-12 col-xl-8">
+                    <img class="img-fluid" src="{% static 'fairdy/storage_location.svg' %}">
+                </div>
+                <div class="col-12 col-xl-8">
+                    <p>
+                       When you select a storage location mode, the blocks which form your system will be assigned to an
+                        individual storage location independent of their stripe. Then, during the failure-injection step,
+                        failures are applied to the storage locations instead of individual blocks. When a storage location
+                        fails, all block within it do so also, but repairs are still conducted according to the stripe which
+                        the block belongs to.
+                    </p>
+                    <h4 class="text-muted">Options</h4>
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Random</th>
+                            <td>blocks are randomly assigned a storage location</td>
+
+                        </tr>
+                        <tr>
+                            <th>Equal Shuffle</th>
+                            <td>blocks are distributed as equally as possible using modulo with the block's sequence number in the system</td>
+                        </tr>
+                        <tr>
+                            <th>Hash Block Index</th>
+                            <td>
+                                similar to Equal Shuffle, but the block's sequence number is first converted to a string and put through a hash
+                                function before modulo is applied to assign the storage location, it is meant to more realistically simulate
+                                real-world storage system behavior than Equal Shuffle
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
 
     </div>
 

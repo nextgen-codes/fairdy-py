@@ -1,5 +1,4 @@
 {% block content %}
-
     <style>
         .internal_table {
             border-collapse: collapse;
@@ -13,258 +12,84 @@
         }
     </style>
 
-    <script>
-    $(document).ready(function () {
-        let url = new URL(window.location.href);
-        let params = url.searchParams;
-        let id_list = params.getAll('id');
 
-        //when first loading the page, recheck all the check boxes that are stored in the query dict
-        replace_checks(id_list);
-        update_id_list(id_list);
-        refresh_buttons(id_list);
+    <table class="table table-sm table-bordered">
+        <thead>
+        <tr>
+                <th>storage system</th>
+                <th>curve</th>
+                <th>blocks in stripe</th>
+                <th>system dimension</th>
+                <th>options</th>
+                <th>details</th>
+            </tr>
 
-        //anytime a checkbox's state is changed, the 'id_list' variable in this page's javascript is updated
-        $('input:checkbox').change(function() {
-            update_id_list(id_list);
-        });
+        </thead>
+        <tbody>
+        {% for simulation in sims %}
+            <tr>
+                <!--STORAGE SYSTEM COLUMN-->
+                <td class="internal_cell">
+                    <table class="internal_table">
+                        <tr><td><input type="checkbox" id="checkboxid_{{ simulation.id }}"> {{ simulation }}</td></tr>
+                        <tr><td><a href="{% url 'fairdy:visualize' %}?id={{ simulation.id }}">view sim{{ simulation.id }}</a></td></tr>
+                    </table>
 
-        //when a link is clicked to another pagination page, first update the link's query dict with any
-        // changes made to checkboxes and also the username if necessary
-        $('.page-link').click(function() {
-            update_href($(this), params, id_list);
-        });
-
-        //when the compare button is clicked, update the link with the collected ids before following it
-        $('#compare_button').click(function () {
-            update_href($(this), params, id_list);
-        });
-
-        //when the download button is clicked, update the link with the collected ids before following it
-        $('#download_button').click(function () {
-            update_href($(this), params, id_list);
-        });
-
-    });
-
-
-    //recheck the simulations that have been stored in the query dict when revisiting the page they are on
-    function replace_checks(id_list) {
-        $('input:checkbox').each(function () {
-            let id = $(this).attr('id').replace('checkboxid_', '');
-            if (id_list.includes(id)) {
-                $(this).attr('checked', true);
-            }
-        });
-    }
-
-    //toggles the state of the compare and download buttons when enough simulations are selected
-    function refresh_buttons(id_list) {
-        //(de)activate the buttons
-        if (id_list.length > 1) {
-            $('#compare_button').removeClass('disabled');
-        } else {
-            $('#compare_button').addClass('disabled');
-        }
-        if (id_list.length > 0) {
-            $('#download_button').removeClass('disabled');
-        } else {
-            $('#download_button').addClass('disabled');
-        }
-    }
-
-    //function to update the id_list stored in memory based on what was
-    //checked or unchecked on the currently display page
-    function update_id_list(id_list) {
-
-        //look at the checkboxes that are checked
-        $("input:checkbox:checked").each(function() {
-            let id = $(this).attr('id').replace('checkboxid_', '');
-            if (!id_list.includes(id)) {
-                id_list.push(id);
-            }
-        });
-
-        //look at the checkboxes that are unchecked
-        $("input:checkbox:not(:checked)").each(function() {
-            let id = $(this).attr('id').replace('checkboxid_', '');
-            if (id_list.includes(id)) {
-                let index = id_list.indexOf(id);
-                if (index > -1) {
-                    id_list.splice(index, 1);
-                }
-            }
-        });
-        refresh_buttons(id_list);
-
-    }
-
-    //delete all ids in the query dict and replace them with the updated list
-    //there was no good way to delete invidual ids out of the query dict
-    function update_href(element, params, id_list) {
-        let link = element.attr("href");
-
-        if (element.attr('id')=='compare_button' || element.attr('id')=='download_button') {
-            link = link.split('?')[0] += '?'
-            params.delete('username')
-        } else if (id_list.length > 0 || params.has('username')) {
-            link += '&'
-        }
-
-
-        params.delete('id');
-        params.delete('page');
-
-        id_list.forEach(function (item, index) {
-            params.append('id', item);
-        });
-
-        link += params.toString();
-        element.attr("href", link);
-    }
-    </script>
-
-    <div class="card">
-        <!--CARD HEADER-->
-        <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title">Simulations of Storage System Life Cycles</h4>
-            <a class="btn btn-primary" href="{% url 'fairdy:run_simulation' %}{% if request.code_type %}?code_type={{ request.code_type }}{% endif %}">New</a>
-        </div>
-
-        <!--CARD BODY-->
-        <div class="card-body">
-            <h5 class="card-subtitle text-muted">
-                {% if 'username' in request.GET %}
-                    showing systems ran by {{ request.GET.username }}
-                {% elif not request.code_type %}
-                    showing systems using using all erasure codes
-                {% else %}
-                    showing systems using {{ request.code_type.label}} erasure codes
-                {% endif %}
-            </h5>
-            <table class="table table-sm table-bordered">
-            <thead>
-                <tr>
-                    <th>system</th>
-                    <th>thumbnail</th>
-                    <th>blocks per stripe</th>
-                    <th>count</th>
-                    <th>options</th>
-                    <th>user</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for simulation in page_obj %}
-                <tr>
-                    <td class="internal_cell">
-                        <table class="internal_table">
-                            <tr><td><input type="checkbox" id="checkboxid_{{ simulation.id }}"> {{ simulation }}</td></tr>
-                            <tr><td><a href="{% url 'fairdy:visualize' %}?id={{ simulation.id }}">view #{{ simulation.id }}</a></td></tr>
-                        </table>
-
-                    </td>
-                    <td>
-                        <img src="data:image/png;base64,{{ simulation.get_thumbnail }}" class="img-fluid">
-                    </td>
-                    <td class="internal_cell">
-                        <table class="internal_table">
-                            <tr><th>data</th><td>{{ simulation.k_value }}</td></tr>
-                            <tr><th>redundancy</th><td>{{ simulation.m_value }}</td></tr>
-                            <tr style="border-top: 1px solid gray"><th>total</th><td>{{ simulation.n_value }}</td></tr>
-                        </table>
-                    </td>
-                    <td class="internal_cell">
-                        <table class="internal_table">
-                            <tr><th>stripes</th><td>{{ simulation.num_stripes }}</td></tr>
-                            <tr><th>cycles</th><td>{{ simulation.num_cycles }}</td></tr>
-                            <tr></tr>
-                        </table>
-                    </td>
-                    <!--OPTIONS COLUMN-->
-                    <td class="internal_cell">
-                        <table class="internal_table">
-                            {% if simulation.storage_location_mode is not None %}
-                            <tr><th>storage mode</th><td>{{ simulation.storage_location_mode }}</td></tr>
-                            {% endif %}
-                            {% if simulation.num_storage_locations != simulation.num_blocks_in_system %}
-                            <tr><th>storage locations</th><td>{{ simulation.num_storage_locations }}</td></tr>
-                            {% endif %}
-                            {% if simulation.lazy_heal_threshold != 1 %}
-                            <tr><th>lazy heal threshold (horizontal)</th><td>{{ simulation.lazy_heal_threshold }}</td></tr>
-                            {% endif %}
-                            {% if simulation.pyramidsimulation and simulation.pyramidsimulation.lazy_heal_threshold_ver != 1 %}
-                            <tr><th>lazy heal threshold (vertical)</th><td>{{ simulation.pyramidsimulation.lazy_heal_threshold_ver }}</td></tr>
-                            {% endif %}
-                            {% if simulation.pyramidsimulation %}
-                            <tr><th>repair cycles</th><td>{{ simulation.pyramidsimulation.num_repair_cycles }}</td></tr>
-                            {% endif %}
-                        </table>
-                    </td>
-                    <td class="internal_cell">
-                        <table class="internal_table">
-                            {% with username=simulation.fairdy_user.user.username %}
-                            <td><a href="{% url 'fairdy:index' %}?username={{ username }}">{{ username }}</a></td>
-                            {% endwith %}
-                            <tr><td>{{ simulation.end_time }}</td></tr>
-                            <tr></tr>
-                        </table>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        </div>
-        <!--CARD FOOTER-->
-        <div class="card-footer d-flex justify-content-between">
-            <div class="d-inline-flex">
-                <span style="font-size: 1.5em">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                </span>
-            </div>
-
-            <nav class="d-inline-flex">
-                <ul class="pagination m-0 ">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                    {% endif %}
-
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">{{ page_obj.number }}</a>
-                    </li>
-
-
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Next</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-
-            <div class="btn-group">
-                <a class="btn btn-primary disabled" href="{% url 'fairdy:get_csv' %}" id="download_button">Download</a>
-                <a class="btn btn-primary disabled" href="{% url 'fairdy:visualize' %}" id="compare_button">Compare</a>
-            </div>
-        </div>
-    </div>
-
+                </td>
+                <!--THUMBNAIL COLUMN-->
+                <td>
+                    <img src="data:image/png;base64,{{ simulation.get_thumbnail }}" class="img-fluid p-0">
+                </td>
+                <!--BLOCKS PER STRIPE-->
+                <td class="internal_cell">
+                    <table class="internal_table">
+                        <tr><td>{{ simulation.k_value }}</td><td><small class="text-muted">data</small></td></tr>
+                        <tr><td>{{ simulation.m_value }}</td><td><small class="text-muted">redundancy</small></td></tr>
+                        <tr style="border-top: 1px solid gray"><td>{{ simulation.n_value }}</td><td><small class="text-muted">total</small></td></tr>
+                    </table>
+                </td>
+                <!--SYSTEM SIZE COLUMN-->
+                <td class="internal_cell">
+                    <table class="internal_table">
+                        <tr><td>{{ simulation.num_cycles }}</td><td><small class="text-muted">cycles</small></td></tr>
+                        <tr style="border-top: 1px solid gray"><td>{{ simulation.num_stripes }}</td><td><small class="text-muted">stripes</small></td></tr>
+                        <tr><td>{{ simulation.num_blocks_in_system }}</td><td><small class="text-muted">blocks</small></td></tr>
+                        <tr></tr>
+                    </table>
+                </td>
+                <!--OPTIONS COLUMN-->
+                <td class="internal_cell">
+                    <table class="internal_table">
+                        {% if simulation.storage_location_mode is not None %}
+                        <tr><th>storage mode</th><td>{{ simulation.storage_location_mode }}</td></tr>
+                        {% endif %}
+                        {% if simulation.num_storage_locations != simulation.num_blocks_in_system %}
+                        <tr><th>storage locations</th><td>{{ simulation.num_storage_locations }}</td></tr>
+                        {% endif %}
+                        {% if simulation.lazy_heal_threshold != 1 %}
+                        <tr><th>lazy heal threshold (horizontal)</th><td>{{ simulation.lazy_heal_threshold }}</td></tr>
+                        {% endif %}
+                        {% if simulation.pyramidsimulation and simulation.pyramidsimulation.lazy_heal_threshold_ver != 1 %}
+                        <tr><th>lazy heal threshold (vertical)</th><td>{{ simulation.pyramidsimulation.lazy_heal_threshold_ver }}</td></tr>
+                        {% endif %}
+                        {% if simulation.pyramidsimulation %}
+                        <tr><th>repair cycles</th><td>{{ simulation.pyramidsimulation.num_repair_cycles }}</td></tr>
+                        {% endif %}
+                    </table>
+                </td>
+                <td class="internal_cell">
+                    <table class="internal_table">
+                        {% with username=simulation.fairdy_user.user.username %}
+                        <td><a href="{% url 'fairdy:index' %}?username={{ username }}">{{ username }}</a></td>
+                        {% endwith %}
+                        <tr><td>{{ simulation.end_time|date:"d-M-Y" }}</td></tr>
+                        <tr></tr>
+                    </table>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 {% endblock %}

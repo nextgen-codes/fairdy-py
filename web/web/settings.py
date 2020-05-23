@@ -14,7 +14,6 @@ SECRET_KEY = '4c#)$!813^fn&3er35z5(_ff28xuxwlxq&1k$fbbt$g#t%he*_'
 
 # Enable the accounts app to require a user is logged in, and has verified email before running simulations
 USE_ACCOUNTS_APP = True
-# TODO
 REQUIRE_EMAIL_VERIFICATION = True
 ENFORCE_BLOCK_CYCLE_LIMIT = True
 
