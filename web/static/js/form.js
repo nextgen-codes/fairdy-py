@@ -1,10 +1,5 @@
 function refreshFields() {
     let code = $('#id_code_type > option:selected').val();
-    let num_stripes = parseInt($('#id_num_stripes').val());
-    let blocks_per_stripe = parseInt($('#id_n_value').val());
-    let blocks_in_system = num_stripes * blocks_per_stripe;
-    $('#id_blocks_in_system').val(blocks_in_system);
-    refreshStorageLocations(blocks_in_system);
     resetAttributes();
     switch(code) {
         case 'REP':
@@ -20,6 +15,11 @@ function refreshFields() {
             $('.gpc-fields').hide();
             break;
     }
+    let num_stripes = parseInt($('#id_num_stripes').val());
+    let blocks_per_stripe = parseInt($('#id_n_value').val());
+    let blocks_in_system = num_stripes * blocks_per_stripe;
+    $('#id_blocks_in_system').val(blocks_in_system);
+    refreshStorageLocations(blocks_in_system);
 }
 
 function refreshStorageLocations(blocks_in_system) {

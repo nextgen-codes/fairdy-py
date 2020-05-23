@@ -1,16 +1,80 @@
 {% extends "help.html" %}
+{% load static %}
 {% block title %}Documentation - Compare and Download{% endblock %}
 {% block content_help %}
 
     <div class="col-12">
         <div>
-            <h2>How to download and visually compare simulations.</h2>
-            <ol>
-                <li>Select the sims you want</li>
-                <li>Click the button</li>
-            </ol>
+            <h1 class="display-4">View, Compare, and Download Simulations</h1>
+            <p>
+                In addition to running and storing individual storage system life cycle simulations, you are also able to
+                compare the results of several simulations simultaneously and download the raw simulation data.
+            </p>
+            <p>
+                Both the compare and download features are controlled by the checkboxes and buttons on the main simulation
+                index page. Simply check the boxes you wish to compare or download, and click the appropriate button. Your
+                selections will be stored as you navigate between different page numbers.
+            </p>
+
+            <hr>
+            <h1>View</h1>
+            <p>
+                After a simulation is finished processing you will be redirected to a page where you can view the results.
+                This page includes a plot of the Block Availability Factor throughout the evolution of your system, as well as
+                details of the system itself.
+            </p>
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid" src="{% static 'fairdy/baf_plot.png' %}" alt="baf">
+                </div>
+            </div>
+            <small>The evolution of a storage system shown in terms of BAF during each cycle</small>
+
+            <hr>
+            <h1>Compare</h1>
+            <p>
+                To view and compare the results of several simulations simultaneously, check the box for the relevant
+                simulations followed by the "Compare" Button.
+            </p>
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid" src="{% static 'fairdy/compare_checkbox.png' %}" alt="baf">
+                </div>
+            </div>
+            <small>Selecting two Reed-Solomon systems for comparison</small>
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid" src="{% static 'fairdy/compare_rs.png' %}" alt="baf">
+                </div>
+            </div>
+            <small>
+                Comparing these two simulations with otherwise identical specifications we see that the lazy heal threshold
+                of 16 has a serious negative effect on the evolution of the system over time.
+            </small>
+
+            <hr>
+            <h1>Download</h1>
+            <p>
+                You can download the results of any simulation in a comma separated values (CSV) file to analyze or plot
+                the data in software of your choice. The data includes the parameters used to define the storage system and
+                simulation, along with 3 pieces of data for each of the simulation's cycles: block availability factor, number
+                of blocks faulted this cycle, and number of blocks healed this cycle.
+            </p>
+
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid" src="{% static 'fairdy/csv_excel.png' %}" alt="csv">
+                </div>
+            </div>
+            <small>example: downloaded simulation data shown in Microsoft Excel</small>
+
+            <hr>
+            <h1>Selected Observations</h1>
 
         </div>
+
     </div>
 
 {% endblock %}

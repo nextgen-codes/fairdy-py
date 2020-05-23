@@ -268,7 +268,7 @@
         //refresh the disabled fields whenever a non-disabled
         //field is changed or a new code type is selected
         $('select').change(refreshFields);
-        $('input:not([readonly])').change(refreshFields);
+        $('input').focusout(refreshFields);
 
         //enable the popovers on the input fields
         $(function () {

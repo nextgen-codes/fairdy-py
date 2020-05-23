@@ -5,6 +5,8 @@
     <div class="col-12">
         <div>
             <h1 class="display-3">Running Simulations</h1>
+            <p>Not sure what we're talking about here? Check out the <a href="{% url 'fairdy:help_getting_started' %}">Getting Started</a>
+            page first.</p>
             <p>
                 In order to run storage system life cycle simulations on this website you must register an account and validate
                 your email address. In addition, there is a generous limit on the cumulative amount of computational resources
@@ -215,12 +217,20 @@
 
             <hr>
             <h4 class="text-muted">Stripes per simulation</h4>
-            <div class="row">
+            <div class="row pl-4">
                 <div class="col-6 col-lg-3">
                     <img class="img-fluid p-0" style="width: 15em;" src="{% static 'fairdy/stripes_in_sim.svg' %}">
                 </div>
                 <div class="col-6 col-lg-9">
-                    <p>the number of times the stripe you have defined is repeated before being concatenated into a storage system</p>
+                    <p>
+                        This field is the number of times the stripe you have defined is repeated before being concatenated into a storage system.
+                        The total number of blocks in your system will be the number of blocks per stripe multiplied by the number of stripes.
+                    </p>
+                    <p>
+                        <strong>TIP</strong>: choose a number which will give your system more than 1,000 total blocks. With fewer blocks than this in your system
+                        you may notice larger variations between simulations of identical systems because of different random seeds. (we do not
+                        set random seeds in FaiRDy-Py, on this website they are provided by the server's OS)
+                    </p>
                 </div>
             </div>
 
@@ -232,7 +242,10 @@
                 </div>
                 <div class="col-6 col-lg-9">
                     <p>
-                       the number of two-part cycles, each with fault-injection and repair, your storage system is evolved through
+                       The number of two-part cycles, each with fault-injection and repair, your storage system is evolved through.
+                    </p>
+                    <p>
+                        <strong>TIP</strong>: 100 cycles are usually sufficient for most codes to get a feel for the evolution of the system over time.
                     </p>
                 </div>
             </div>
@@ -245,8 +258,8 @@
                 </div>
                 <div class="col-6 col-lg-9">
                     <p>
-                       the probability an available block in the system fails in the fault injection step of an individual cycle, when
-                        an advanced storage location mode is enabled, the probability an individual storage location fails
+                       The probability an available block in the system fails in the fault injection step of an individual cycle, when
+                        an advanced storage location mode is enabled, the probability an individual storage location fails.
                     </p>
                 </div>
             </div>
