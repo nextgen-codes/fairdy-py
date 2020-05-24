@@ -78,6 +78,7 @@ def run_module_simulation(web_sim):
             lazy_heal_threshold_vert=web_sim.pyramidsimulation.lazy_heal_threshold_ver,
             storage_fault_mode=web_sim.storage_location_mode,
             num_of_storage=web_sim.num_storage_locations if web_sim.storage_location_mode else None,
+            repair_cycle=web_sim.pyramidsimulation.num_repair_cycles
         )
     # RUN SIMULATION
     module_sim.loop_simulation(
