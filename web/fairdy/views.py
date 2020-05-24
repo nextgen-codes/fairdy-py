@@ -26,14 +26,17 @@ def index(request, code_type=None):
         if code_type not in installed_codes:
             raise Http404()
         else:
+            # get sim list from database filtered by the valid code
             request.code_type = Simulation.Codes[code_type]
             sim_list = Simulation.objects.filter(code_type=request.code_type)
     else:
         sim_list = Simulation.objects.all()
+        # filter the sim list from database by username if present in the query string
         if 'username' in request.GET:
             fairdy_user = FairdyUser.objects.get(user__username=request.GET['username'])
             sim_list = sim_list.filter(fairdy_user=fairdy_user)
 
+    # Django paginator initialization
     paginator = Paginator(sim_list.order_by('-id'), 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
