@@ -81,10 +81,10 @@
             <hr>
             <h4>Reed-Solomon codes</h4>
             <p>
-                Reed-Solomon codes are optimal erasure codes, and tolerate a number of block erasures equal to the number of
-                redundancy blocks in the stripe. In real storage systems the contents of the redundancy blocks are computed
-                and decoded using advanced linear algebra, this is however ignored in FaiRDy and a stripe will be repaired
-                as long as enough active blocks remain to allow this.
+                Reed-Solomon (RS) codes are optimal erasure codes, such codes are also called maximum distance separable (MDS) codes.
+                RS codes tolerate a number of block erasures equal to the number of redundancy blocks in the stripe. In real storage
+                systems the contents of the redundancy blocks are computed and decoded using advanced linear algebra, this is however
+                ignored in FaiRDy and a stripe will be repaired as long as enough active blocks remain to allow this.
             </p>
             <p>
                 Repair Rules:<br>
@@ -108,19 +108,20 @@
             <hr>
             <h4>Generalized Pyramid codes</h4>
             <p>
-                The Generalized Pyramid codes implemented by FaiRDy are composed of up to two different Reed-Solomon stripe shapes,
+                The Generalized Pyramid codes implemented by FaiRDy are composed of maximum distance separable (MDS) codes,
+                such as Reed-Solomon stripes, where data blocks belong to two stripes.
                 one in the vertical direction and one in the horizontal direction. This provides an extra layer of protection since each data block
                 is a member of two different Reed-Solomon stripes, with each providing a possibility for repair. Two different
-                Generalized Pyramid code stripe constructions are possible in FaiRDy, standard non-overlapping with the blocks
-                 arranged in the shape of a hexagon, and an overlapping with the blocks arrange in the shape of a rectangle. The
+                Generalized Pyramid code stripe constructions are possible in FaiRDy, a standard non-overlapping with the blocks
+                 arranged in an L-shaped polygon, and an overlapping construction with the blocks arrange in the shape of a rectangle. The
                 overlapping construction adds an additional dimension of redundancy, with the overlapping redundancy blocks computed
                 using the vertically redundant as data input blocks.
             </p>
             <p>
                 Repair Rules:<br>
-                A Generalized Pyramid stripe is considered repairable as long as some combination of
-                vertical and horizontal sub-stripes are repairable according to Reed-Solomon rules to restore
-                all data blocks.
+                In a Generalized Pyramid stripe, the vertical and horizontal Reed-Solomon stripes are repaired individually
+                in accordance with the rules for this erasure code. If all blocks in theGeneralized Pyramid stripe are able
+                to be repaired in this way, the stripe is considered completely repaired.
             </p>
 
             <hr>
