@@ -24,7 +24,7 @@ EMAIL_HOST = 'broremann.ux.uis.no'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['fairdy.ux.uis.no', 'gorina2.ux.uis.no', '192.168.1.105']
 
@@ -124,5 +124,5 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-STATIC_URL = '/static/'
+STATIC_URL = '/web/static/'
 STATIC_ROOT = '/home/prosjekt/fairdy/fairdy-py/web/static/'
