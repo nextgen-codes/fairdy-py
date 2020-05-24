@@ -38,7 +38,7 @@ class Simulation():
         self.history = None
         self.fault_history = None
         self.baf_history = None
-        self.blocks_failed_history = None
+        self.blocks_died_history = None
         self.blocks_healed_history = None
         self.include_history = include_history
         self.include_fault_history = include_fault_history
@@ -236,11 +236,12 @@ class Simulation():
         # initialize baf-history and heals and failures
         self.baf_history = np.empty(loops + 1, dtype=np.float64)
         self.baf_history[0] = self.baf
-        self.blocks_failed_history = np.empty(loops + 1, dtype=int)
-        self.blocks_failed_history[0] = 0
+        self.blocks_died_history = np.empty(loops + 1, dtype=int)
+        self.blocks_died_history[0] = 0
         self.blocks_healed_history = np.empty(loops + 1, dtype=int)
         self.blocks_healed_history[0] = 0
 
+        #Run simulation
         for i in range(loops):
             if i % 10 == 0 and self.verbose:
                 print("Number of loops done: ", i)
@@ -250,7 +251,7 @@ class Simulation():
 
             healthy_before_fault = np.sum(self.array == 1)
             self._fault_injection(p_error[i])
-            self.blocks_failed_history[i+1] = healthy_before_fault - np.sum(self.array == 1)
+            self.blocks_died_history[i+1] = healthy_before_fault - np.sum(self.array == 1)
 
             if self.include_fault_history:
                 self.fault_history[i+1] = np.array(self.array)
@@ -289,7 +290,7 @@ class Simulation():
                 if self.include_fault_history:
                     self.fault_history = self.fault_history[0:i+2]
                 self.baf_history = self.baf_history[0:i+2]
-                self.blocks_failed_history = self.blocks_failed_history[0:i+2]
+                self.blocks_died_history = self.blocks_died_history[0:i+2]
                 self.blocks_healed_history = self.blocks_healed_history[0:i+2]
                 return
 
