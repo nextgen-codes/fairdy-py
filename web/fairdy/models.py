@@ -122,6 +122,10 @@ class Simulation(models.Model):
         pyplot.close()
         return base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
 
+    def increment_view_count(self):
+        self.view_count += 1
+        self.save()
+
 
 class Cycle(models.Model):
     simulation = models.ForeignKey(Simulation, on_delete=models.CASCADE)

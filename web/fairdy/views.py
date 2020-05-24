@@ -174,6 +174,8 @@ def run_simulation(request):
                 if web_sim:
                     web_sim.delete()
                 messages.error(request, error)
+        else:
+            messages.error(request, "There was an error with the stripe parameters you entered.")
 
     else:    # = request.method is NOT POST
         sim_form = SimulationForm()
@@ -227,10 +229,9 @@ def visualize(request):
         raise Http404()
     ids = request.GET.getlist('id')
     sims = Simulation.objects.filter(pk__in=ids).order_by('-id')
+    # increment the view count on each of the simulations
     for sim in sims:
-        sim.view_count += 1
-        sim.save()
-
+        sim.increment_view_count()
     data = {'sims': sims}
     # get the highest num_cycles any of the sims have and add
     # an additional one to compensate for cycle 0 with baf 1

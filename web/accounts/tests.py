@@ -10,7 +10,7 @@ class RegistrationTest(TestCase):
     def setUp(self):
         c = Client()
         response = c.post('/accounts/register/', {'email': 'test@fairdy.no', 'username': 'testuser',
-                                                       'password1': 'kjH457*fhs6&&', 'password2': 'kjH457*fhs6&&'})
+                                                       'password1': 'kjH45636&&', 'password2': 'kjH45636&&'})
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(username='testuser')
         fairdy_user = FairdyUser.objects.get(user_id=user.id)

@@ -83,7 +83,7 @@
                         <td><a href="{% url 'fairdy:index' %}?username={{ username }}">{{ username }}</a></td>
                         {% endwith %}
                         <tr><td>{{ simulation.end_time|date:"d-M-Y" }}</td></tr>
-                        <tr></tr>
+                        <tr><td>{{ simulation.view_count }} views</td></tr>
                     </table>
                 </td>
             </tr>
