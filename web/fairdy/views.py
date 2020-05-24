@@ -162,7 +162,7 @@ def run_simulation(request):
                         simulation=web_sim,
                         block_availability_factor=module_sim.baf_history[cycle],
                         num_faulted_blocks=module_sim.blocks_failed_history[cycle],
-                        num_repaired_blocks=module_sim.blocks_healed_history[cycle]
+                        num_repaired_blocks=module_sim.blocks_died_history[cycle]
                     ) for cycle in range(len(module_sim.baf_history))
                 )
                 Cycle.objects.bulk_create(cycles)
