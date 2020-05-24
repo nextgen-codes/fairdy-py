@@ -125,3 +125,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/prosjekt/fairdy/fairdy-py/web/static/'
