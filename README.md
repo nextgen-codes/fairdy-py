@@ -1,6 +1,6 @@
 # FaiRDy-Py
 
-FaiRDy-Py is a python implementation, and accompanying website for running cellular automata style erasure and repair simulations of storage devices as created by Veronica Estrada Galiñanes.
+FaiRDy-Py is a python implementation, and accompanying website for running cellular automata style erasure and repair simulations of storage devices as envisioned by Veronica Estrada Galiñanes.
 
 
 
