@@ -16,17 +16,15 @@ Simulation <-- General Pyramid Code <-- Reed Solomon <-- Replication
 
 There are three main modes of fault injection: Random fault, and storage fault
 
-Random fault
+### Random fault
 
-```
+
 faults for every block based on the p_error which is defined while running the the simulation. For each block it will roll a random number between 0 and 1. If the number is greater or equal to p_error, it will survive. If not, it will fail.
 
 p_error can be specified as a single float, or as an array of floats the same length as number of loops to run the simulation.
-```
 
-Storage fault
+### Storage fault
 
-```
 instead of failing each individual block, as if each block is stored on an individual storage device. Multiple blocks are stored in the same location, and for each step in the simulation every storage device has a chance to fail. If it fails, every block on that device becomes unavailable.
 
 Storage failure has four modes for allocating blocks to storage: random, equal_shuffle, hash_block_index, and custom.
@@ -35,7 +33,7 @@ For type random: blocks are randomly divided across the specified number of stor
 For type equal_shuffle: each storage container contains an equal amount of blocks, to the extent that it is possible.
 For hash_block_index: the index of each blocks is converted to string, hashed and modulo number of storage locations to distribute blocks.
 for custom: a block distribution is not set by the object, but can be created by the user and set via <object>.storage_fault_array
-```
+
 
 ## Fault_repair
 
