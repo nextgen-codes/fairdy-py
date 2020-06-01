@@ -8,25 +8,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 fairdy_module_path = os.path.dirname(BASE_DIR)
 sys.path.append(fairdy_module_path)
 
-# TODO isolate for fairdy.no
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4c#)$!813^fn&3er35z5(_ff28xuxwlxq&1k$fbbt$g#t%he*_'
+SECRET_KEY = 'secret'
 
 # Enable the accounts app to require a user is logged in, and has verified email before running simulations
-USE_ACCOUNTS_APP = True
-REQUIRE_EMAIL_VERIFICATION = True
-ENFORCE_BLOCK_CYCLE_LIMIT = True
+USE_ACCOUNTS_APP = False
+REQUIRE_EMAIL_VERIFICATION = False
+ENFORCE_BLOCK_CYCLE_LIMIT = False
 
 # SMTP server used to send email validation messages
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'broremann.ux.uis.no'
+EMAIL_BACKEND = None
+EMAIL_HOST = None
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fairdy.ux.uis.no', '192.168.1.199']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'fairdy.apps.FairdyConfig',
-    'mod_wsgi.server'
-
 ]
 
 MIDDLEWARE = [
@@ -126,4 +124,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/prosjekt/fairdy/fairdy-py/web/www/static/'

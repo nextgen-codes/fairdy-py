@@ -102,15 +102,16 @@ def is_valid_user(request):
     return True
 
 
-def user_has_enough_bcc(fairdy_user, web_sim):
+def user_has_enough_bcc(web_sim):
     # if the accounts app is turned off, ignore null fairdy_user
-    if not fairdy_user:
+    if not web_sim.fairdy_user:
         if not settings.USE_ACCOUNTS_APP:
             return True
         else:
             return False
     # Check user has enough block cycle credits available to run this simulation
-    elif settings.USE_ACCOUNTS_APP and settings.ENFORCE_BLOCK_CYCLE_LIMIT and fairdy_user.can_run_simulation(web_sim):
+    elif settings.USE_ACCOUNTS_APP and settings.ENFORCE_BLOCK_CYCLE_LIMIT \
+            and web_sim.fairdy_user.can_run_simulation(web_sim):
         return True
     else:
         return False
@@ -134,18 +135,17 @@ def run_simulation(request):
     if request.method == 'POST':
         sim_form = SimulationForm(request.POST)
         gpc_form = PyramidSimulationForm(request.POST)
-        fairdy_user = FairdyUser.objects.get(user_id=request.user.id)
 
         if sim_form.is_valid():
             web_sim = sim_form.save(commit=False)
+            web_sim.fairdy_user = FairdyUser.objects.get(user_id=request.user.id) if request.user.is_authenticated else None
+            web_sim.start_time = timezone.now()
 
             # check the user has enough credits to run the sim, or is exempt
-            if not user_has_enough_bcc(fairdy_user, web_sim):
+            if not user_has_enough_bcc(web_sim):
                 messages.error(request, 'You do not have enough block cycle credits to run this simulation, '
                                         'ask the administrator to raise your limit.')
                 return redirect('fairdy:index')
-            web_sim.fairdy_user = fairdy_user
-            web_sim.start_time = timezone.now()
 
             # deal with extra fields required by pyramid codes
             if web_sim.code_type == Simulation.Codes.GENERALIZED_PYRAMID and not initialize_gp(web_sim, gpc_form):

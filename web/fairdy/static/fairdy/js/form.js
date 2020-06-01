@@ -46,10 +46,10 @@ function refreshRS() {
     let k_val = parseInt($('#id_k_value').val())
     let n_val = m_val + k_val;
 
-    $('#id_k_value').attr('data-content', '<img src="/web/static/fairdy/rs_k.svg">');
+    $('#id_k_value').attr('data-content', '<img src="/static/fairdy/rs_k.svg">');
     $('#id_k_value').attr('title', 'The number of equally sized data blocks per stripe');
 
-    $('#id_m_value').attr('data-content', '<img src="/web/static/fairdy/rs_m.svg">');
+    $('#id_m_value').attr('data-content', '<img src="/static/fairdy/rs_m.svg">');
     $('#id_m_value').attr('title', 'The number of equally sized redundancy blocks per stripe');
 
     $('#id_n_value').val(n_val);
@@ -73,7 +73,7 @@ function refreshGP() {
     $('.gpc-fields').show();
     refreshGpcOverlap();
 
-    $('#id_n_value').attr('data-content', '<img src="/web/static/fairdy/gpc.svg">');
+    $('#id_n_value').attr('data-content', '<img src="/static/fairdy/gpc.svg">');
     $('#id_n_value').attr('title', 'This stripe has 20 blocks');
 
     $('#id_m_value').attr('readonly', true);
