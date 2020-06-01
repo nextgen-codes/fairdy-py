@@ -122,7 +122,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "web/static"),
+    os.path.join(BASE_DIR, "static"),
 ]
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/prosjekt/fairdy/fairdy-py/web/www/static/'
