@@ -26,7 +26,7 @@ EMAIL_HOST = 'broremann.ux.uis.no'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fairdy.ux.uis.no', 'gorina2.ux.uis.no', '192.168.1.105']
+ALLOWED_HOSTS = ['fairdy.ux.uis.no', '192.168.1.199']
 
 
 # Application definition
