@@ -1,6 +1,8 @@
 # FaiRDy-Py
 
-## Introduction
+FaiRDy-Py is a python implementation, and accompanying website for running cellular automata style erasure and repair simulations of storage devices as envisioned by Veronica Estrada Galiñanes.
+
+
 
 ## Class structure
 
@@ -12,28 +14,62 @@ Simulation <-- General Pyramid Code <-- Reed Solomon <-- Replication
 
 ## Fault_injection
 
-There are two main modes of fault injection: Random fault, and storage fault
+There are three main modes of fault injection: Random fault, and storage fault
 
-Random fault
+### Random fault
 
-    faults for every block based on the p_error which is defined while running the the simulation. For each block it will roll a random number between 0 and 1. If the number is greater or equal to p_error, it will survive. If not, it will fail.
 
-    p_error can be specified as a single float, or as an array of floats the same length as number of loops to run the simulation.
+faults for every block based on the p_error which is defined while running the the simulation. For each block it will roll a random number between 0 and 1. If the number is greater or equal to p_error, it will survive. If not, it will fail.
 
-Storage fault
+p_error can be specified as a single float, or as an array of floats the same length as number of loops to run the simulation.
 
-    Storage fault simulates storing multiple blocks on the same storage, and then the storage fails. for each loop in the simulation, one storage will fail, and p_error does not affect the simulation.
-    
-    Storage failure has two modes: random and equal_shuffle.
+### Storage fault
 
-    For type random: blocks are randomly divided across the specified number of storages. there is no guarantee for how many or few blocks are place in each storage container.  
-    For type equal_shuffle: each storage container contains an equal amount of blocks, to the extent that it is possible.
+instead of failing each individual block, as if each block is stored on an individual storage device. Multiple blocks are stored in the same location, and for each step in the simulation every storage device has a chance to fail. If it fails, every block on that device becomes unavailable.
+
+Storage failure has four modes for allocating blocks to storage: random, equal_shuffle, hash_block_index, and custom.
+
+For type random: blocks are randomly divided across the specified number of storages. there is no guarantee for how many or few blocks are place in each storage container.  
+For type equal_shuffle: each storage container contains an equal amount of blocks, to the extent that it is possible.
+For hash_block_index: the index of each blocks is converted to string, hashed and modulo number of storage locations to distribute blocks.
+for custom: a block distribution is not set by the object, but can be created by the user and set via <object>.storage_fault_array
+
 
 ## Fault_repair
 
+Fault repair is done by looking at one Reed-Solomon stripe at a time. For Generalized Pyramid Codess, this is done first for vertical stripes and then for horizontal stripes. for Reed Solomon and Replication it is done only vertically, as they are one dimensional. Healing is performed when the number of missing blocks in a stripe exceeds or is equal to the lazy_heal_threshold, it will attemt to heal the stripe. A stripe will heal if the number of blocks left in the stripe are more than the original amount of wordblocks. If there is less blocks left than the original amount of wordblocks, the stripe is dead, and will continue to decay over the next simulations.
+
 ### Generalized pyramid codes
+The Generalized Pyramid codes implemented by FaiRDy are composed of maximum distance separable (MDS) codes, such as ReedSolomon stripes, where data blocks belong to two stripes. one in the vertical direction and one in the horizontal direction. This provides
+an extra layer of protection since each data block is a member of two different Reed-Solomon stripes, with each providing a possibility
+for repair. Two different Generalized Pyramid code stripe constructions are possible in FaiRDy, a standard non-overlapping with the
+blocks arranged in an L-shaped polygon, and an overlapping construction with the blocks arrange in the shape of a rectangle. The
+overlapping construction adds an additional dimension of redundancy, with the overlapping redundancy blocks computed using the
+vertically redundant as data input blocks.
+Repair Rules:
+
+In a Generalized Pyramid stripe, the vertical and horizontal Reed-Solomon stripes are repaired individually in accordance with the rules
+for this erasure code. If all blocks in theGeneralized Pyramid stripe are able to be repaired in this way, the stripe is considered
+completely repaired.
+
+Non-overlapping:
+The number of horizontal stripes is equal to the number of DATA blocks in the vertical stripes, and correspondingly, the number of
+vertical stripes is equal to the number of DATA blocks in horizontal stripes.
+
+Overlapping:
+The number of horizontal stripes is equal to the TOTAL number of blocks in the vertical stripe, and correspondingly, the number of
+vertical stripes is equal to the TOTAL number of blocks in the horizontal stripe. The overlapping redundancy blocks are computed using
+the vertical redundancy blocks as the input data blocks, and thereby provide second degree redundancy.
+
 
 ### Reed Solomon codes
+Reed-Solomon (RS) codes are optimal erasure codes, such codes are also called maximum distance separable (MDS) codes. RS codes
+tolerate a number of block erasures equal to the number of redundancy blocks in the stripe. In real storage systems the contents of the
+redundancy blocks are computed and decoded using advanced linear algebra, this is however ignored in FaiRDy and a stripe will be
+repaired as long as enough active blocks remain to allow this.
+Repair Rules:
+A Reed-Solomon stripe is considered repairable as long as the number of erased blocks does not exceed the number of redundancy
+blocks.
 
 ## Class parameters:
 
@@ -44,17 +80,25 @@ number of stripes:
 * num_of_stripes
   * The number of stripes in the object.
 
+Heal parameters:
+* Generalized Pyramid Codes
+  * lazy_heal_threshold_hor
+  * lazy_heal_threshold_vert
+* Reed Solomon and Replication
+  * lazy_heal_threshold
+
+
 Storage parameters:
 
 * storage_fault_mode
-  * "random", "equal_shuffle"
+  * "random", "equal_shuffle", "hash_block_index", "custom"
   * disabled when set to None (Default)
 * num_of_storage
   * amount of storage location to divide blocks into
 
 Simulation history parameters:
 
-    These parameters store historic steps of the module if enabled. This is disabled as default. With very large object definitions, storing the history may use quite a bit of ram.
+These parameters store historic steps of the module if enabled. This is disabled as default. With very large object definitions, storing the history may use quite a bit of ram.
 
 * include_history: True or False (Default)
 * include_fault_history: True or False (Default)
@@ -93,6 +137,16 @@ verbose printing:
 * p_error
   * the chance for each block to fail during a failure injection.
   * this is not used if storage_fault_mode is defined.
+
+### Information after running simulations
+After simulations have been run, some information is stored on the object:
+
+* baf_history
+  * the block availability factor for the whole storage object over time.
+* blocks_died_history
+  * how many blocks became unavailable at every step in the simulations.
+* blocks_healed_history
+  * how many blocks were healed at every step in the simulation.
 
 ## Examples
 
