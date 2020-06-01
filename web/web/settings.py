@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'fairdy.apps.FairdyConfig'
+    'mod_wsgi.server'
 
 ]
 
