@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'fairdy.apps.FairdyConfig'
+    'fairdy.apps.FairdyConfig',
     'mod_wsgi.server'
 
 ]
