@@ -17,10 +17,6 @@ USE_ACCOUNTS_APP = False
 REQUIRE_EMAIL_VERIFICATION = False
 ENFORCE_BLOCK_CYCLE_LIMIT = False
 
-# SMTP server used to send email validation messages
-EMAIL_BACKEND = None
-EMAIL_HOST = None
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
